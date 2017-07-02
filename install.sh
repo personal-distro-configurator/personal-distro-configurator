@@ -23,6 +23,7 @@ printf "\nStarting logs\n"
 pdc_confirm
 
 # 5.Execute
+pdc_execute
 
 # 6.Clean
 
