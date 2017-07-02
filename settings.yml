@@ -1,0 +1,8 @@
+settings:
+  verbose: false
+  path:
+    install: "${HOME}/.personal-distro-configurator/"
+    log: "${HOME}/.personal-distro-configurator/log/"
+    tmp: "${HOME}/.personal-distro-configurator/tmp/"
+  file:
+    log: "install.log"
