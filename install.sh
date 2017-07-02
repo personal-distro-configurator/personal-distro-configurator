@@ -14,6 +14,7 @@ source sh/init/imports.sh
 printf " ok\n"
 
 # 2.Setup
+pdc_setup
 
 # 3.Test
 
