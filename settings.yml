@@ -1,8 +1,16 @@
 settings:
+  update_distro: true
   verbose: false
+  system:
+    distro: ""
+    version: ""
+    arch: ""
+    wm: ""
   path:
     install: "${HOME}/.personal-distro-configurator/"
     log: "${HOME}/.personal-distro-configurator/log/"
     tmp: "${HOME}/.personal-distro-configurator/tmp/"
   file:
     log: "install.log"
+  dependencies:
+    - 
