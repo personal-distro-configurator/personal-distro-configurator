@@ -19,6 +19,8 @@ pdc_setup
 # 3.Test
 
 # 4.confirm
+printf "\nStarting logs\n"
+pdc_confirm
 
 # 5.Execute
 
