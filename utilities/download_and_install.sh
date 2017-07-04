@@ -1,5 +1,7 @@
 #!/bin/sh
 
+echo "Remove old content" && rm -rf pdc
+
 echo "Downloading project"
 curl -sL "https://github.com/jasperes/personal-distro-configurator/archive/master.tar.gz" | tar xz
 
