@@ -4,7 +4,7 @@ Personal Distro Configurator (PDC) is a framework to install and configure every
 
 ## Creating your own settings
 
-To create your own install, you will need a **settings.yml** file, with your own settings.
+To create your own install, you will need a `pdc.yml` file, with your own settings.
 Look to samples folder.
 
 To create a install script, copy and paste this line:

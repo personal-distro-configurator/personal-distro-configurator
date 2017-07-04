@@ -6,7 +6,7 @@ function pdc_setup() {
     pdc_create_variables "settings.yml"
 
     if [ -f "../settings.yml" ]; then
-        pdc_create_variables "../settings.yml"
+        pdc_create_variables "../pdc.yml"
     fi
 
     _create_if_not_exists "$settings_path_install"
