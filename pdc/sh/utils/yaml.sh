@@ -24,7 +24,7 @@ function parse_yaml() {
     sed 's/_=/+=/g'
 }
 
-function pdc_create_veriables() {
+function pdc_create_variables() {
     printf "Loading settings...\n"
 
     local yaml_file="$1"

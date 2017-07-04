@@ -3,7 +3,11 @@
 function pdc_setup() {
     printf "Setup installer...\n"
 
-    pdc_create_veriables "settings.yml"
+    pdc_create_variables "settings.yml"
+
+    if [ -f "../settings.yml" ]; then
+        pdc_create_variables "../settings.yml"
+    fi
 
     _create_if_not_exists "$settings_path_install"
     _create_if_not_exists "$settings_path_log"
