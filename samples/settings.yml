@@ -1,0 +1,20 @@
+settings:
+  system:
+    distro: "archlinux"
+    arch: "x86_64"
+    wm: "i3"
+  dependencies:
+    - git
+    - wget
+    - zsh
+    - vim
+    - htop
+    - tree
+    - python
+    - python-pip
+    - conky
+    - mpd
+    - ncmpcpp
+    - ranger
+    - firefox
+    - termite
