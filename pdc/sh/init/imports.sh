@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Utils
+source sh/utils/utils.sh
 source sh/utils/yaml.sh
 source sh/utils/log.sh
 
@@ -11,3 +12,6 @@ source sh/init/execute.sh
 
 # Distro
 source sh/distro/archlinux.sh
+
+# Installers
+source sh/installers/pip.sh

@@ -15,5 +15,12 @@ function pdc_execute() {
         log_info && log_info "Dependencies installed with success!" && log_info
     fi
 
+    # Install pip
+    if [[ "$settings_pip" != "" ]]; then
+        log_info && log_info "Running pip install..." && log_info
+        pip_install
+        log_info && log_info "Pip install executed with success!" && log_info
+    fi
+
     log_info && log_info "Executions done!" && log_info
 }

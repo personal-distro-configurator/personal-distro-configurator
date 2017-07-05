@@ -14,3 +14,5 @@ settings:
     log: "install.log"
   dependencies:
     - 
+  pip:
+    -
