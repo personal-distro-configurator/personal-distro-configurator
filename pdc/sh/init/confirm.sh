@@ -15,25 +15,12 @@ function pdc_confirm() {
 
     log_info
 
-    if [[ "$settings_update_distro" == "true" ]]; then
-        log_info "# Distro will be updated" && log_info
-    fi
+    [[ "$settings_update_distro" == "true" ]] && log_info "# Distro will be updated" && log_info
+    [[ "$settings_dependencies" != "" ]] && log_info "# Dependencies: ${settings_dependencies[*]}" && log_info
 
-    if [[ "$settings_dependencies" != "" ]]; then
-        log_info "# Dependencies: ${settings_dependencies[*]}" && log_info
-    fi
-
-    if [[ "$settings_pip" != "" ]]; then
-        log_info "# PIP: ${settings_pip[*]}" && log_info
-    fi
-
-    if [[ "$settings_gem" != "" ]]; then
-        log_info "# GEM: ${settings_gem[*]}" && log_info
-    fi
-
-    if [[ "$settings_npm" != "" ]]; then
-        log_info "# NPM: ${settings_npm[*]}" && log_info
-    fi
+    [[ "$settings_pip" != "" ]] && log_info "# PIP: ${settings_pip[*]}" && log_info
+    [[ "$settings_gem" != "" ]] && log_info "# GEM: ${settings_gem[*]}" && log_info
+    [[ "$settings_npm" != "" ]] && log_info "# NPM: ${settings_npm[*]}" && log_info
 
     log_info "Confirm? [Y/n]" && read -r option
 
