@@ -29,5 +29,12 @@ function pdc_execute() {
         log_info && log_info "Gem install executed with success!" && log_info
     fi
 
+    # Install npm
+    if [[ "$settings_npm" != "" ]]; then
+        log_info && log_info "Running npm install..." && log_info
+        npm_install
+        log_info && log_info "Npm install executed with success!" && log_info
+    fi
+
     log_info && log_info "Executions done!" && log_info
 }

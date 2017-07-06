@@ -16,3 +16,4 @@ source sh/distro/archlinux.sh
 # Installers
 source sh/installers/pip.sh
 source sh/installers/gem.sh
+source sh/installers/npm.sh
