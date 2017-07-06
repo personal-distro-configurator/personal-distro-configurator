@@ -5,16 +5,19 @@ settings:
     wm: "i3"
   dependencies:
     - git
-    - wget
-    - zsh
-    - vim
-    - htop
-    - tree
+    - ruby
     - python
     - python-pip
-    - conky
-    - mpd
-    - ncmpcpp
-    - ranger
+    - npm
     - firefox
     - termite
+    - zsh
+    - zip
+  pip:
+    - pep8
+  gem:
+    - carrierwave
+    - kaminari
+  npm:
+    - bower
+    - grunt
