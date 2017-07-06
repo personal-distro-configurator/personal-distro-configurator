@@ -3,6 +3,8 @@
 function pdc_setup() {
     printf "Setup installer...\n"
 
+    pdc_lock_file
+
     pdc_create_variables "settings.yml"
 
     [ -f "../pdc.yml" ] && pdc_create_variables "../pdc.yml"

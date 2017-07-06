@@ -4,6 +4,7 @@
 source sh/utils/utils.sh
 source sh/utils/yaml.sh
 source sh/utils/log.sh
+source sh/utils/lock.sh
 
 # Init
 source sh/init/setup.sh
