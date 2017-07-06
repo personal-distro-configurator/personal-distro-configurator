@@ -27,4 +27,4 @@ pdc_execute
 
 # 6.Clean
 
-log_info && log_info "Installation done with success!"
+log_info "Installation done with success!" && exit 0

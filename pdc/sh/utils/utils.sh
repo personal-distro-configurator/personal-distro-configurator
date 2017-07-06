@@ -11,7 +11,7 @@ function pdc_command_not_found() {
     log_info "Command ${command} not found. Abort installation? [y/N]" && read -r option
 
     if [[ $option != 'Y' && $option != 'y' && $option != '' ]]; then
-        log_info && log_info "Canceled by user"
+        log_info "Canceled by user"
         exit 1
     fi
 }
