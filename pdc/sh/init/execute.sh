@@ -22,5 +22,12 @@ function pdc_execute() {
         log_info && log_info "Pip install executed with success!" && log_info
     fi
 
+    # Install gem
+    if [[ "$settings_gem" != "" ]]; then
+        log_info && log_info "Running gem install..." && log_info
+        gem_install
+        log_info && log_info "Gem install executed with success!" && log_info
+    fi
+
     log_info && log_info "Executions done!" && log_info
 }

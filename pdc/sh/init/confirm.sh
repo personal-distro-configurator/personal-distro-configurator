@@ -27,6 +27,10 @@ function pdc_confirm() {
         log_info "# PIP: ${settings_pip[*]}" && log_info
     fi
 
+    if [[ "$settings_gem" != "" ]]; then
+        log_info "# GEM: ${settings_gem[*]}" && log_info
+    fi
+
     log_info "Confirm? [Y/n]" && read -r option
 
     if [[ $option != 'Y' && $option != 'y' && $option != '' ]]; then
