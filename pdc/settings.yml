@@ -12,8 +12,10 @@ settings:
     tmp: "${HOME}/.personal-distro-configurator/tmp/"
   file:
     log: "install.log"
+  yaml_files:
+    -
   dependencies:
-    - 
+    -
   pip:
     -
   gem:
