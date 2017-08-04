@@ -17,7 +17,7 @@ echo "" >> CHANGELOG.md
 
 for entry in changelogs/unreleased/*; do
 
-	while read -r line; do
+	while read -r line || [[ -n "$line" ]]; do
 		declare "$(echo "${line}" | cut -d ':' -f1)"="$(echo ${line} | cut -d ':' -f2)"
 	done < "$entry"
 
