@@ -1,8 +1,21 @@
 # TODO
 
-- doc!
-- install and configure dotfiles via git or local
-- clone git projects
-- import sh files
-- list of scripts to execute
-- configure distro (locale, language, etc)
+- plugins
+    - steps: imports, setup, test, confirm, execue, clean...
+- remove all no-core scripts
+    - change distro to repository (archlinux -> pacman)
+- Execution list (list of scripts to execute)
+- Import sh files
+- doc
+
+
+# Plugins
+
+- dotfiles
+- git
+- pip
+- npm
+- gem
+- pacman
+- apt-get
+- yum
