@@ -2,6 +2,11 @@
 
 function pdc_execute() {
 
+    # Plugins
+    for i in ${!settings_plugin_steps_execute[*]}; do
+        eval ${settings_plugin_steps_execute[i]}
+    done
+
     ## TODO: Move to plugin {
 
     # Update distro

@@ -1,6 +1,7 @@
 #!/bin/bash
 
 function pdc_confirm() {
+    # Header
     log_info && log_info "--------------------------------------- --"
     log_info && log_info "Personal Distro Configurator install at $(date)"
 
@@ -22,6 +23,11 @@ function pdc_confirm() {
 
     for yaml_file in $settings_yaml_files; do
         log_info "$yaml_file"
+    done
+
+    # Plugins
+    for i in ${!settings_plugin_steps_confirm[*]}; do
+        eval ${settings_plugin_steps_confirm[i]}
     done
 
     ## TODO: Move to plugin {
