@@ -12,7 +12,7 @@ function pdc_setup() {
         pdc_create_variables "$yaml_file"
     done
 
-    [ -f "../pdc.yml" ] && pdc_create_variables "../pdc.yml"
+    [ -f "${settings_path_install}/pdc.yml" ] && pdc_create_variables "${settings_path_install}/pdc.yml"
 
     _create_if_not_exists "$settings_path_install"
     _create_if_not_exists "$settings_path_log"
