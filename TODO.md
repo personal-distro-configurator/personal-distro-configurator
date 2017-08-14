@@ -1,11 +1,17 @@
 # TODO
 
 - plugins
-    - steps: imports, setup, test, confirm, execue, clean...
+    - loggin
+    - Download plugin tarbal
+    - Copy plugin folder
 - remove all no-core scripts
     - change distro to repository (archlinux -> pacman)
 - Execution list (list of scripts to execute)
-- Import sh files
+- steps
+    - verify instalation is ok
+    - clean after install
+- Fix paths
+- Tests
 - doc
 
 
