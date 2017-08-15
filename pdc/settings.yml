@@ -1,5 +1,5 @@
 settings:
-  update_distro: true
+  # update_distro: true --Must be moved to a plugin
   verbose: false
   system:
     distro: ""
@@ -17,11 +17,14 @@ settings:
     log: "install.log"
   yaml_files:
     -
-  dependencies:
+  plugins:
     -
-  pip:
-    -
-  gem:
-    -
-  npm:
-    -
+# These scripts must be moved to a plugin
+#  dependencies:
+#    -
+#  pip:
+#    -
+#  gem:
+#    -
+#  npm:
+#    -
