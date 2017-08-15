@@ -1,5 +1,5 @@
 settings:
-  update_distro: true
+  # update_distro: true --Must be moved to a plugin
   verbose: false
   system:
     distro: ""
@@ -10,15 +10,19 @@ settings:
     install: "${HOME}/.personal-distro-configurator/"
     log: "${HOME}/.personal-distro-configurator/log/"
     tmp: "${HOME}/.personal-distro-configurator/tmp/"
+    plugins: "../plugins/"
   file:
     log: "install.log"
   yaml_files:
     -
-  dependencies:
+  plugins:
     -
-  pip:
-    -
-  gem:
-    -
-  npm:
-    -
+# These scripts must be moved to a plugin
+#  dependencies:
+#    -
+#  pip:
+#    -
+#  gem:
+#    -
+#  npm:
+#    -

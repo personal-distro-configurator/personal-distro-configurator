@@ -3,21 +3,9 @@ settings:
     distro: "archlinux"
     arch: "x86_64"
     wm: "i3"
-  dependencies:
-    - git
-    - ruby
-    - python
-    - python-pip
-    - npm
-    - firefox
-    - termite
-    - zsh
-    - zip
-  pip:
-    - pep8
-  gem:
-    - carrierwave
-    - kaminari
-  npm:
-    - bower
-    - grunt
+  plugins:
+    - user/project
+    - https://git.com/user/project.git
+    - git@git.com:user/project.git
+    - path:://path/to/plugin
+    - tarball::endpoint/to/tarbal.tar
