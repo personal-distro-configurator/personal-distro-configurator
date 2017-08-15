@@ -32,8 +32,8 @@ function pdc_create_variables() {
     [ -f "${settings_path_install}/pdc.yml" ] && pdc_create_variables "${settings_path_install}/pdc.yml"
 
     # Plugins .yml
-    [ -d "../plugins" ] &&
-    for entry in ../plugins/*; do
+    [ -d "${settings_path_plugins}" ] &&
+    for entry in $settings_path_plugins/*; do
 
         [ -d "$entry" ] && [ "$(ls "$entry")" ] &&
         for e in $entry/*; do
