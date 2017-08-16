@@ -1,5 +1,5 @@
 settings:
-  update_distro: true
+  # update_distro: true --Must be moved to a plugin
   verbose: false
   system:
     distro: ""
@@ -7,16 +7,24 @@ settings:
     arch: ""
     wm: ""
   path:
-    install: "${HOME}/.personal-distro-configurator/"
-    log: "${HOME}/.personal-distro-configurator/log/"
-    tmp: "${HOME}/.personal-distro-configurator/tmp/"
+    install: "../"
+    log: "${settings_path_install}/log/"
+    tmp: "${settings_path_install}/tmp/"
+    resources: "${settings_path_install}/resources"
+    scripts: "${settings_path_install}/scripts"
+    plugins: "${settings_path_install}/plugins"
   file:
     log: "install.log"
-  dependencies:
-    - 
-  pip:
+  yaml_files:
     -
-  gem:
+  plugins:
     -
-  npm:
-    -
+# These scripts must be moved to a plugin
+#  dependencies:
+#    -
+#  pip:
+#    -
+#  gem:
+#    -
+#  npm:
+#    -

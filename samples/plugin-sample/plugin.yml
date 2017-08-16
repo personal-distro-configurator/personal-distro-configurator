@@ -1,0 +1,11 @@
+settings:
+  plugin:
+    steps:
+      import:
+        -
+      setup:
+        -
+      confirm:
+        -
+      execute:
+        -

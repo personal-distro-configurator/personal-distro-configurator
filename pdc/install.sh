@@ -2,29 +2,32 @@
 
 printf "\n == Welcome to Personal Distro Configurator! == \n\n"
 
-# 0.init
+# Initial Settings
 printf "Initial settings..."
 set -e
 cd $(dirname $(readlink -f $0))
 printf " ok\n"
 
-# 1.imports
+# Imports
 printf "Imports..."
 source sh/init/imports.sh
 printf " ok\n"
 
-# 2.Setup
+# Plugins
+pdc_get_plugins
+
+# Setup
 pdc_setup
 
-# 3.Test
+# TODO: Test
 
-# 4.confirm
+# Confirm
 printf "\nStarting logs\n"
 pdc_confirm
 
-# 5.Execute
+# Execute
 pdc_execute
 
-# 6.Clean
+# TODO: Clean
 
 log_info "Installation done with success!" && exit 0
