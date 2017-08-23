@@ -7,6 +7,13 @@ function pdc_execute() {
         eval ${settings_plugin_steps_execute[i]}
     done
 
+    # User Executions
+    log_info "Running user executions..." && log_info
+    for i in ${!settings_execute[*]}; do
+        eval ${settings_execute[i]}
+    done
+    log_info && log_info "User executions done!" && log_info
+
     ## TODO: Move to plugin {
 
     # Update distro
