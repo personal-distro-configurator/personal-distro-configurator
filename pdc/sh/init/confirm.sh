@@ -25,6 +25,10 @@ function pdc_confirm() {
         log_info "$yaml_file"
     done
 
+    # Executions
+    [ ! ${#settings_execute[@]} -eq 0 ] &&
+    log_verbose "# User execute lines to run: ${#settings_execute[@]}" && log_verbose
+
     # Plugins
     for i in ${!settings_plugin_steps_confirm[*]}; do
         eval ${settings_plugin_steps_confirm[i]}

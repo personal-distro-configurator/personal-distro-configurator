@@ -19,6 +19,8 @@ settings:
     -
   plugins:
     -
+  execute:
+    -
 # These scripts must be moved to a plugin
 #  dependencies:
 #    -
