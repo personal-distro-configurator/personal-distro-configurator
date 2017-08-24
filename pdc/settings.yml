@@ -2,19 +2,19 @@ settings:
   # update_distro: true --Must be moved to a plugin
   verbose: false
   system:
-    distro: ""
-    version: ""
-    arch: ""
-    wm: ""
+    distro:
+    version:
+    arch:
+    wm:
   path:
-    install: "../"
-    log: "${settings_path_install}/log/"
-    tmp: "${settings_path_install}/tmp/"
-    resources: "${settings_path_install}/resources"
-    scripts: "${settings_path_install}/scripts"
-    plugins: "${settings_path_install}/plugins"
+    install: ../
+    log: ${settings_path_install}/log/
+    tmp: ${settings_path_install}/tmp/
+    resources: ${settings_path_install}/resources
+    scripts: ${settings_path_install}/scripts
+    plugins: ${settings_path_install}/plugins
   file:
-    log: "install.log"
+    log: install.log
   yaml_files:
     -
   plugins:
