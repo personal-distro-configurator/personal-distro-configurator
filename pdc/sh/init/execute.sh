@@ -3,9 +3,11 @@
 function pdc_execute() {
 
     # Plugins
+    log_info "Running plugins execute step..." && log_info
     for i in ${!settings_plugin_steps_execute[*]}; do
         eval ${settings_plugin_steps_execute[i]}
     done
+    log_info && log_info "Plugins executions done!" && log_info
 
     # User Executions
     log_info "Running user executions..." && log_info
