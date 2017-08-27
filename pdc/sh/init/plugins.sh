@@ -22,7 +22,7 @@ function pdc_get_plugins() {
 function pdc_clone_plugin() {
     # Git Clone http and ssh
     local git_project_url=$1
-    cd "$settings_path_plugins" && { git clone "$git_project_url"; cd -; }
+    cd "$settings_path_plugins" && { log_verbose "Clone $git_project_url" && log_verbose; git clone "$git_project_url"; cd -; }
 }
 
 function pdc_download_plugin() {
