@@ -4,7 +4,7 @@ function pdc_setup() {
     printf "Setup installer...\n"
 
     pdc_lock_file
-    pdc_create_variables
+    pdc_setup_create_variables
     pdc_plugin_import
     pdc_create_paths
     pdc_plugin_setup
@@ -24,7 +24,7 @@ function pdc_plugin_import() {
     done
 }
 
-function pdc_create_variables() {
+function pdc_setup_create_variables() {
     # Default .yml
     pdc_create_variables "settings.yml"
 
