@@ -32,14 +32,14 @@ function pdc_setup_create_variables() {
     [ -f "${settings_path_install}/pdc.yml" ] && pdc_create_variables "${settings_path_install}/pdc.yml"
 
     # Plugins .yml
-    [ -d "${settings_path_plugins}" ] &&
-    for entry in ${settings_path_plugins}/*; do
-
-        [ -d "$entry" ] && [ "$(ls "$entry")" ] &&
-        for e in $entry/*; do
-            [ -f "${e}/plugin.yml" ] && pdc_create_variables "${e}/plugin.yml"
+    if [ -d "${settings_path_plugins}" ]; then
+        for entry in ${settings_path_plugins}/*; do
+            [ -d "$entry" ] &&
+            [ "$(ls "$entry")" ] &&
+            [ -f "${entry}/plugin.yml" ] &&
+            pdc_create_variables "${entry}/plugin.yml"
         done
-    done
+    fi
 
     # Additional .yml
     for yaml_file in $settings_yaml_files; do
