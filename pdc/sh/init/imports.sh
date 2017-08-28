@@ -11,13 +11,3 @@ source sh/init/plugins.sh
 source sh/init/setup.sh
 source sh/init/confirm.sh
 source sh/init/execute.sh
-
-## TODO: Move to plugin {
-# Distro
-#source sh/distro/archlinux.sh
-
-# Installers
-#source sh/installers/pip.sh
-#source sh/installers/gem.sh
-#source sh/installers/npm.sh
-## --}

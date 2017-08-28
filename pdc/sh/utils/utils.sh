@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function pdc_test_command() {
+function pdcdef_test_command() {
     local command=$1
 
     hash "$command" 2>/dev/null ||

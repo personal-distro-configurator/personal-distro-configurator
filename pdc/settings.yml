@@ -1,32 +1,36 @@
 settings:
-  # update_distro: true --Must be moved to a plugin
   verbose: false
-  system:
-    distro:
-    version:
-    arch:
-    wm:
   path:
     install: ../
-    log: ${settings_path_install}/log/
-    tmp: ${settings_path_install}/tmp/
-    resources: ${settings_path_install}/resources
-    scripts: ${settings_path_install}/scripts
-    plugins: ${settings_path_install}/plugins
+    log: ${pdcyml_settings_path_install}/log/
+    tmp: ${pdcyml_settings_path_install}/tmp/
+    resources: ${pdcyml_settings_path_install}/resources
+    scripts: ${pdcyml_settings_path_install}/scripts
+    plugins: ${pdcyml_settings_path_install}/plugins
   file:
     log: install.log
-  yaml_files:
+
+system:
+  distro:
+  version:
+  arch:
+  wm:
+
+yaml_files:
+  -
+
+execute:
+  -
+
+plugins:
+  get:
     -
-  plugins:
-    -
-  execute:
-    -
-# These scripts must be moved to a plugin
-#  dependencies:
-#    -
-#  pip:
-#    -
-#  gem:
-#    -
-#  npm:
-#    -
+  steps:
+    import:
+      -
+    setup:
+      -
+    confirm:
+      -
+    execute:
+      -
