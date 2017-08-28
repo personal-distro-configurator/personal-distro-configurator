@@ -1,17 +1,17 @@
 #!/bin/bash
 
-function pdc_get_plugins() {
+function pdcdef_get_plugins() {
 
-    for i in ${!settings_plugins[*]}; do
-        local plugin=${settings_plugins[i]}
+    for i in ${!pdcyml_plugins_get[*]}; do
+        local plugin=${pdcyml_plugins_get[i]}
 
         case $plugin in
-            http://*) pdc_clone_plugin "$plugin" ;; # Git HTTP
-            https://*) pdc_clone_plugin "$plugin" ;; # Git HTTPS
-            git@*) pdc_clone_plugin "$plugin" ;; # Git SSH
-            path::*) pdc_copy_plugin $( echo "$plugin" | sed 's/path:://' ) ;; # Directory Local
-            tarbal::*) pdc_download_plugin $( echo "$plugin" | sed 's/tarbal:://' ) ;; # Tarbal Download
-            *) pdc_clone_plugin "https://github.com/${plugin}.git" ;; # Github
+            http://*) pdcdef_clone_plugin "$plugin" ;; # Git HTTP
+            https://*) pdcdef_clone_plugin "$plugin" ;; # Git HTTPS
+            git@*) pdcdef_clone_plugin "$plugin" ;; # Git SSH
+            path::*) pdcdef_copy_plugin $( echo "$plugin" | sed 's/path:://' ) ;; # Directory Local
+            tarbal::*) pdcdef_download_plugin $( echo "$plugin" | sed 's/tarbal:://' ) ;; # Tarbal Download
+            *) pdcdef_clone_plugin "https://github.com/${plugin}.git" ;; # Github
         esac
     done
 }
@@ -19,19 +19,19 @@ function pdc_get_plugins() {
 # Getting plugins via...
 # ----------------------
 
-function pdc_clone_plugin() {
+function pdcdef_clone_plugin() {
     # Git Clone http and ssh
     local git_project_url=$1
-    cd "$settings_path_plugins" && { log_verbose "Clone $git_project_url" && log_verbose; git clone "$git_project_url"; cd -; }
+    cd "$pdcyml_settings_path_plugins" && { log_verbose "Clone $git_project_url" && log_verbose; git clone "$git_project_url"; cd -; }
 }
 
-function pdc_download_plugin() {
+function pdcdef_download_plugin() {
     # Download compressed plugin (tarbal, zip, rar, etc)
     # TODO
     return
 }
 
-function pdc_copy_plugin() {
+function pdcdef_copy_plugin() {
     # Copy plugin folder from some directory
     # TODO
     return

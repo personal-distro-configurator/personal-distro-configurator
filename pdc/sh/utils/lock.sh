@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function pdc_lock_file() {
+function pdcdef_lock_file() {
     local lock="/tmp/pdc.lock"
 
     exec 200>$lock
