@@ -30,11 +30,11 @@ function parse_yaml() {
     ) < "$yaml_file"
 }
 
-function pdc_create_variables() {
+function pdcdef_create_variables() {
     printf "Loading settings...\n"
 
     local yaml_file="$1"
-    eval "$(parse_yaml $yaml_file)"
+    eval "$(parse_yaml $yaml_file pdcyml)"
 
     printf "Settings loaded!\n"
 }

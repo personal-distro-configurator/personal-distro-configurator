@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function pdc_confirm() {
+function pdcdef_confirm() {
     # Header
     log_info && log_info "--------------------------------------- --"
     log_info && log_info "Personal Distro Configurator install at $(date)"
@@ -10,36 +10,44 @@ function pdc_confirm() {
     log_info
 
     # Distro Info
-    log_info "# Distro   : $settings_system_distro"
-    log_info "# Version  : $settings_system_version"
-    log_info "# Arch     : $settings_system_arch"
-    log_info "# WM       : $settings_system_wm"
+    [[ -n "${pdcyml_system_distro/[ ]*\n/}" ]] &&
+    log_info "# Distro   : $pdcyml_system_distro"
+
+    [[ -n "${pdcyml_system_version/[ ]*\n/}" ]] &&
+    log_info "# Version  : $pdcyml_system_version"
+
+    [[ -n "${pdcyml_system_arch/[ ]*\n/}" ]] &&
+    log_info "# Arch     : $pdcyml_system_arch"
+
+    [[ -n "${pdcyml_system_wm/[ ]*\n/}" ]] &&
+    log_info "# WM       : $pdcyml_system_wm"
 
     log_info
 
     # YAML Files
-    [ ! ${#settings_yaml_files[@]} -eq 0 ] &&
-    log_info "# YAML Settings to add (${#settings_yaml_files[@]}):" && log_info
+    [ ! ${#pdcyml_yaml_files[@]} -eq 0 ] &&
+    log_info "# YAML Settings to add (${#pdcyml_yaml_files[@]}):" && log_info
 
-    for yaml_file in $settings_yaml_files; do
+    for yaml_file in $pdcyml_yaml_files; do
         log_info "$yaml_file"
     done
 
+    # Executions
+    [ ! ${#pdcyml_execute[@]} -eq 0 ] &&
+    log_verbose "# User execute lines to run: ${#pdcyml_execute[@]}" && log_verbose
+
     # Plugins
-    for i in ${!settings_plugin_steps_confirm[*]}; do
-        eval ${settings_plugin_steps_confirm[i]}
+    [ ! ${#pdcyml_plugins_get[@]} -eq 0 ] &&
+    log_verbose "# Plugins add (${#pdcyml_plugins_get[@]}):" && log_verbose
+
+    for yaml_file in $pdcyml_plugins_get; do
+        log_verbose "$yaml_file"
     done
 
-    ## TODO: Move to plugin {
-    # Repository
-    #[[ "$settings_update_distro" == "true" ]] && log_info "# Distro will be updated" && log_info
-    #[[ "$settings_dependencies" != "" ]] && log_info "# Dependencies: ${settings_dependencies[*]}" && log_info
-
-    # Installs
-    #[[ "$settings_pip" != "" ]] && log_info "# PIP: ${settings_pip[*]}" && log_info
-    #[[ "$settings_gem" != "" ]] && log_info "# GEM: ${settings_gem[*]}" && log_info
-    #[[ "$settings_npm" != "" ]] && log_info "# NPM: ${settings_npm[*]}" && log_info
-    ## --}
+    # Plugins Step
+    for i in ${!pdcyml_plugins_steps_confirm[*]}; do
+        eval ${pdcyml_plugins_steps_confirm[i]}
+    done
 
     # Confirm
     log_info "Confirm? [Y/n]" && read -r option

@@ -14,19 +14,19 @@ source sh/init/imports.sh
 printf " ok\n"
 
 # Plugins
-pdc_get_plugins
+pdcdef_get_plugins
 
 # Setup
-pdc_setup
+pdcdef_setup
 
 # TODO: Test
 
 # Confirm
 printf "\nStarting logs\n"
-pdc_confirm
+pdcdef_confirm
 
 # Execute
-pdc_execute
+pdcdef_execute
 
 # TODO: Clean
 

@@ -1,50 +1,28 @@
 #!/bin/bash
 
-function pdc_execute() {
+function pdcdef_execute() {
+
+    # Pre-Execute Plugins
+    log_info "Running pre-execute plugins..." && log_info
+    for i in ${!pdcyml_plugins_pre_execute[*]}; do
+        eval ${pdcyml_plugins_pre_execute[i]}
+    done
+    log_info && log_info "Pre-execute plugins done!" && log_info
 
     # Plugins
-    for i in ${!settings_plugin_steps_execute[*]}; do
-        eval ${settings_plugin_steps_execute[i]}
+    log_info "Running plugins execute step..." && log_info
+    for i in ${!pdcyml_plugins_steps_execute[*]}; do
+        eval ${pdcyml_plugins_steps_execute[i]}
     done
+    log_info && log_info "Plugins executions done!" && log_info
 
-    ## TODO: Move to plugin {
+    # User Executions
+    log_info "Running user executions..." && log_info
+    for i in ${!pdcyml_execute[*]}; do
+        eval ${pdcyml_execute[i]}
+    done
+    log_info && log_info "User executions done!" && log_info
 
-    # Update distro
-    #if [[ "$settings_update_distro" == "true" ]]; then
-    #    log_info "Updating distro..." && log_info
-    #    distro_update
-    #    log_info "Distro updated!" && log_info
-    #fi
-
-    # Install all distro dependencies
-    #if [[ "$settings_dependencies" != "" ]]; then
-    #    log_info "Install dependencies..." && log_info
-    #    distro_install_dependencies
-    #    log_info "Dependencies installed with success!" && log_info
-    #fi
-
-    # Install pip
-    #if [[ "$settings_pip" != "" ]]; then
-    #    log_info "Running pip install..." && log_info
-    #    pip_install
-    #    log_info "Pip install executed with success!" && log_info
-    #fi
-
-    # Install gem
-    #if [[ "$settings_gem" != "" ]]; then
-    #    log_info "Running gem install..." && log_info
-    #    gem_install
-    #    log_info "Gem install executed with success!" && log_info
-    #fi
-
-    # Install npm
-    #if [[ "$settings_npm" != "" ]]; then
-    #    log_info "Running npm install..." && log_info
-    #    npm_install
-    #    log_info "Npm install executed with success!" && log_info
-    #fi
-
-    # --}
-
+    # Done
     log_info "Executions done!" && log_info
 }
