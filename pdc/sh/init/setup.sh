@@ -28,9 +28,6 @@ function pdcdef_setup_create_variables() {
     # Default .yml
     pdcdef_create_variables "settings.yml"
 
-    # User .yml
-    [ -f "${pdcyml_settings_path_install}/pdc.yml" ] && pdcdef_create_variables "${pdcyml_settings_path_install}/pdc.yml"
-
     # Plugins .yml
     if [ -d "${pdcyml_settings_path_plugins}" ]; then
         for entry in ${pdcyml_settings_path_plugins}/*; do
@@ -40,6 +37,9 @@ function pdcdef_setup_create_variables() {
             pdcdef_create_variables "${entry}/plugin.yml"
         done
     fi
+
+    # User .yml
+    [ -f "${pdcyml_settings_path_install}/pdc.yml" ] && pdcdef_create_variables "${pdcyml_settings_path_install}/pdc.yml"
 
     # Additional .yml
     for yaml_file in $pdcyml_yaml_files; do
