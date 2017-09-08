@@ -34,7 +34,36 @@ function pdcdef_create_variables() {
     printf "Loading settings...\n"
 
     local yaml_file="$1"
-    eval "$(parse_yaml $yaml_file pdcyml)"
+
+    local variables
+    local exclude
+    local settings
+
+    variables="$(parse_yaml "$yaml_file" pdcyml_)"
+    exclude="$(pdcdef_load_settings "$yaml_file" pdcyml_settings_exclude)"
+
+    for e in ${exclude[*]}; do
+        settings+=( $(echo "$variables" | sed "s/\b$e\b//g") )
+    done
+
+    eval "$variables"
 
     printf "Settings loaded!\n"
+}
+
+function pdcdef_load_settings() {
+    local yaml_file=$1
+    local settings_to_load=$2
+
+    local settings
+    local variables
+
+    variables="$(parse_yaml "$yaml_file" pdcyml_)"
+
+    for setting in $settings_to_load; do
+        settings+=( $(echo "$variables" | grep "^${setting}=") )
+        settings+=( $(echo "$variables" | grep "^${setting}+=") )
+    done
+
+    echo "${settings[@]}"
 }

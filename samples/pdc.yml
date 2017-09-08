@@ -11,5 +11,8 @@ plugins:
     - git@git.com:user/project.git
     - path:://path/to/plugin
     - tarball::endpoint/to/tarbal.tar
-  pre_execute:
-    - echo "a pre-execute plugin script"
+
+execute:
+  - plugin plugin-name
+  - bash myFile.sh
+  - shell echo something
