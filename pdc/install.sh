@@ -1,11 +1,12 @@
 #!/bin/bash
+# shellcheck disable=SC1091
 
 printf "\n == Welcome to Personal Distro Configurator! == \n\n"
 
 # Initial Settings
 printf "Initial settings..."
 set -e
-cd $(dirname $(readlink -f $0))
+cd "$(dirname "$(readlink -f "$0")")"
 printf " ok\n"
 
 # Imports

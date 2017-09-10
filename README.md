@@ -1,5 +1,10 @@
 `ALERT: We are in alpha, nothing are realy tested or configured as the final released can be.`
 
+[![Build status][travis-image]][travis-url]
+
+[travis-image]: https://travis-ci.org/personal-distro-configurator/personal-distro-configurator.svg?branch=master
+[travis-url]: https://travis-ci.org/personal-distro-configurator/personal-distro-configurator
+
 # Personal Distro Configurator
 
 Personal Distro Configurator (PDC) is a framework to install and configure everything you want on your distro. With it, you can transform a fresh linux install into your personal distro!

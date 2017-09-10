@@ -1,6 +1,24 @@
 #!/bin/bash
+# shellcheck disable=SC2154
 
 # Credits to https://github.com/jasperes/bash-yaml/
+#
+# Read an yaml file and create variables with these configs
+#
+# @arg1: path to yaml file
+# @arg2: (optional) prefix for variables
+#
+# Result example, with yaml:
+#
+# person:
+#   name: John
+#   age: 30
+#
+# Will result in variables:
+#
+# person_name=John
+# person_age=30
+#
 function parse_yaml() {
     local yaml_file=$1
     local prefix=$2
@@ -30,6 +48,11 @@ function parse_yaml() {
     ) < "$yaml_file"
 }
 
+# Read an yaml file and create variables, using parse_yaml function.
+# Variables configured to be excluded will be ignored
+#
+# @arg1: path to yaml file
+#
 function pdcdef_create_variables() {
     printf "Loading settings...\n"
 
@@ -43,7 +66,7 @@ function pdcdef_create_variables() {
     exclude="$(pdcdef_load_settings "$yaml_file" pdcyml_settings_exclude)"
 
     for e in ${exclude[*]}; do
-        settings+=( $(echo "$variables" | sed "s/\b$e\b//g") )
+        settings+=( "$(sed "s/\b$e\b//g" <<< "$variables")" )
     done
 
     eval "$variables"
@@ -51,6 +74,12 @@ function pdcdef_create_variables() {
     printf "Settings loaded!\n"
 }
 
+# Read an yaml file and output a list of settings
+# to be created as variables
+#
+# @arg1: path to yanl file
+# @arg2: list of settings to filter in yaml
+#
 function pdcdef_load_settings() {
     local yaml_file=$1
     local settings_to_load=$2
@@ -61,8 +90,8 @@ function pdcdef_load_settings() {
     variables="$(parse_yaml "$yaml_file" pdcyml_)"
 
     for setting in $settings_to_load; do
-        settings+=( $(echo "$variables" | grep "^${setting}=") )
-        settings+=( $(echo "$variables" | grep "^${setting}+=") )
+        settings+=( "$(grep "^${setting}=" <<< "$variables")" )
+        settings+=( "$(grep "^${setting}+=" <<< "$variables")" )
     done
 
     echo "${settings[@]}"
