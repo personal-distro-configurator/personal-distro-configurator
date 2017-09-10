@@ -1,0 +1,14 @@
+os:
+  - linux
+
+language: bash
+
+addons:
+  apt:
+    sources:
+      - debian-sid
+    packages:
+      - shellcheck
+
+script:
+  - bash ./hack/shellcheck.sh
