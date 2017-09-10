@@ -1,41 +1,79 @@
 #!/bin/bash
+# shellcheck disable=SC2154
 
-function pdcdef_get_plugins() {
-
-    for i in ${!pdcyml_plugins_get[*]}; do
-        local plugin=${pdcyml_plugins_get[i]}
-
-        case $plugin in
-            http://*) pdcdef_clone_plugin "$(echo ${plugin} | cut -d ':' -f1)" "$(echo ${plugin} | cut -d ':' -f2)" ;; # Git HTTP
-            https://*) pdcdef_clone_plugin "$(echo ${plugin} | cut -d ':' -f1)" "$(echo ${plugin} | cut -d ':' -f2)" ;; # Git HTTPS
-            git@*) pdcdef_clone_plugin "$plugin" ;; # Git SSH
-            path::*) pdcdef_copy_plugin $( echo "$plugin" | sed 's/path:://' ) ;; # Directory Local
-            tarbal::*) pdcdef_download_plugin $( echo "$plugin" | sed 's/tarbal:://' ) ;; # Tarbal Download
-            *) pdcdef_clone_plugin "https://github.com/$(echo ${plugin} | cut -d ':' -f1).git" "$(echo ${plugin} | cut -d ':' -f2)" ;; # Github
-        esac
-    done
-}
+# -------------------------------------------------------------
+# .PLUGIN STEP
+#
+# Save plugins to plugins folder, getting from git or other way
+# -------------------------------------------------------------
 
 # Getting plugins via...
 # ----------------------
 
+# Git Clone plugin, only Head
+#
+# @arg1: git url
+# @arg2: (optional) branch or tag to clone
+#
 function pdcdef_clone_plugin() {
-    # Git Clone http and ssh
     local git_project_url=$1
-    local branch=$([[ -n "${pdcyml_system_wm/[ ]*\n/}" ]] && echo "--branch $2")
+    local branch=""
     local cmd="git clone ${git_project_url} ${branch} --depth 1"
 
-    cd "$pdcyml_settings_path_plugins" && $cmd; cd -;
+    # if branch is informed in arg2, set to clone it
+    branch=$([[ -n "${pdcyml_system_wm/[ ]*\n/}" ]] && echo "--branch $2")
+
+    cd "$pdcyml_settings_path_plugins" && $cmd; cd - || exit 1;
 }
 
+# Download compressed plugin (tarbal, zip, rar, etc)
 function pdcdef_download_plugin() {
-    # Download compressed plugin (tarbal, zip, rar, etc)
-    # TODO
-    return
+    return # TODO
 }
 
+# Copy plugin folder from some directory
 function pdcdef_copy_plugin() {
-    # Copy plugin folder from some directory
-    # TODO
-    return
+    return # TODO
+}
+
+# Main
+# ----
+
+function pdcdef_get_plugins() {
+    for i in ${!pdcyml_plugins_get[*]}; do
+        local plugin=${pdcyml_plugins_get[i]}
+
+        case $plugin in
+
+            # Git HTTP Clone
+            http://*)
+                pdcdef_clone_plugin "$(cut -d ':' -f1 <<< "$plugin")" "$(cut -d ':' -f2 <<< "$plugin")"
+            ;;
+
+            # Git HTTPS Clone
+            https://*)
+                pdcdef_clone_plugin "$(cut -d ':' -f1 <<< "$plugin")" "$(cut -d ':' -f2 <<< "$plugin")"
+            ;;
+
+            # Git SSH Clone
+            git@*)
+                pdcdef_clone_plugin "$plugin"
+            ;;
+
+            # Copy plugin from folder
+            path::*)
+                pdcdef_copy_plugin "$(sed 's/path:://' <<< "$plugin")"
+            ;;
+
+            # Download plugin as tarball
+            tarbal::*)
+                pdcdef_download_plugin "$(sed 's/tarbal:://' <<< "$plugin")"
+            ;;
+
+            # GitHub Plugin Clone
+            *)
+                pdcdef_clone_plugin "https://github.com/$(cut -d ':' -f1 <<< "$plugin").git" "$(cut -d ':' -f2 <<< "$plugin")"
+            ;;
+        esac
+    done
 }

@@ -1,4 +1,11 @@
 #!/bin/bash
+# shellcheck disable=SC1091
+
+# --------------------------------
+# .IMPORT STEP
+#
+# import all core scripts from PDC
+# --------------------------------
 
 # Utils
 source sh/utils/utils.sh
