@@ -1,3 +1,13 @@
+*Auto-generated file from hack/release/changelog.sh*
+## 0.0.4 (2017-09-19)
+
+- Add plugin version by git branch or tag [#33](https://github.com/personal-distro-configurator/personal-distro-configurator/pull/33)
+- Add executor for execute step [#34](https://github.com/personal-distro-configurator/personal-distro-configurator/pull/34)
+- Remove plugins execute list from main execute step [#34](https://github.com/personal-distro-configurator/personal-distro-configurator/pull/34)
+- Remove plugin pre-execute step [#34](https://github.com/personal-distro-configurator/personal-distro-configurator/pull/34)
+- Continuous integration with travis [#36](https://github.com/personal-distro-configurator/personal-distro-configurator/pull/36)
+- Added scripts to manage tests and release 
+
 ## 0.0.3 (2017-08-29)
 
 - Implement list of scripts to execute by user [#22](https://github.com/personal-distro-configurator/personal-distro-configurator/pull/22)
