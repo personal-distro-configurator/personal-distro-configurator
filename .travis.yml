@@ -10,5 +10,8 @@ addons:
     packages:
       - shellcheck
 
+before_script:
+  - chmod +x ./hack/make.sh
+
 script:
-  - bash ./hack/shellcheck.sh
+  - ./hack/make.sh test
