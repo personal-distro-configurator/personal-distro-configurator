@@ -77,7 +77,7 @@ function pdcdef_create_variables() {
 # Read an yaml file and output a list of settings
 # to be created as variables
 #
-# @arg1: path to yanl file
+# @arg1: path to yaml file
 # @arg2: list of settings to filter in yaml
 #
 function pdcdef_load_settings() {
@@ -94,5 +94,5 @@ function pdcdef_load_settings() {
         settings+=( "$(grep "^${setting}+=" <<< "$variables")" )
     done
 
-    echo "${settings[@]}"
+    sed 's/ $//' <<< "${settings[@]}"
 }

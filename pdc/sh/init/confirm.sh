@@ -41,7 +41,7 @@ function pdcdef_confirm_yaml() {
     log_verbose "# YAML Settings to add (${#pdcyml_yaml_files[@]}):" &&
     log_verbose
 
-    for yaml_file in $pdcyml_yaml_files; do
+    for yaml_file in ${pdcyml_yaml_files[*]}; do
         log_verbose "$yaml_file"
     done
 }
@@ -51,6 +51,8 @@ function pdcdef_confirm_executions() {
     [ ! ${#pdcyml_execute[@]} -eq 0 ] &&
     log_verbose "# User execute lines to run: ${#pdcyml_execute[@]}" &&
     log_verbose
+
+    return 0
 }
 
 # [VERBOSE] list of plugins to get
@@ -59,7 +61,7 @@ function pdcdef_confirm_plugins() {
     log_verbose "# Plugins add (${#pdcyml_plugins_get[@]}):" &&
     log_verbose
 
-    for yaml_file in $pdcyml_plugins_get; do
+    for yaml_file in ${pdcyml_plugins_get[*]}; do
         log_verbose "$yaml_file"
     done
 }
@@ -74,9 +76,9 @@ function pdcdef_confirm_plugins_step() {
 # Final, confirm it
 function pdcdef_confirm_confirm() {
     # Confirm
-    log_info "Confirm? [Y/n]" && read -r option
+    log_info "Confirm? [Y/n]" && read -r opt
 
-    if [[ $option != 'Y' && $option != 'y' && $option != '' ]]; then
+    if [ "$opt" != 'Y' ] && [ "$opt" != 'y' ] && [ "$opt" != '' ]; then
         log_info && log_info "Canceled by user"
         exit 1
     fi

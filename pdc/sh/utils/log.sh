@@ -21,7 +21,6 @@ function log_info() {
     # Create log folder if not exists
     if [ ! -d "$pdcyml_settings_path_log" ]; then
         mkdir -p "$pdcyml_settings_path_log"
-        log_info && log_info "Creating directory $pdcyml_settings_path_log"
     fi
 
     # Create log file if not exists
