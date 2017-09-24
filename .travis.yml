@@ -11,10 +11,11 @@ addons:
       - shellcheck
 
 before_script:
+  - npm install --only=dev
   - chmod +x ./hack/make.sh
 
 script:
-  - ./hack/make.sh test
+  - ./hack/make.sh test --all
 
 notifications:
   email:

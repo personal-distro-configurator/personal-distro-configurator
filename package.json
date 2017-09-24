@@ -1,0 +1,21 @@
+{
+  "name": "personal-distro-configurator",
+  "description": "A framework to configure by zero your own distro.",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/personal-distro-configurator/personal-distro-configurator.git"
+  },
+  "keywords": [
+    "pdc",
+    "personal-distro-configurator",
+    "linux-installer",
+    "linux-configuration"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/personal-distro-configurator/personal-distro-configurator/issues"
+  },
+  "devDependencies": {
+    "editorconfig-checker": ">=1.1.1"
+  }
+}

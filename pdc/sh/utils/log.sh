@@ -43,6 +43,6 @@ function log_verbose() {
 
     # if verbose are configured to true, log it
     if [[ "$pdcyml_settings_verbose" == "true" ]]; then
-	   log_info "$msg"
+        log_info "$msg"
     fi
 }

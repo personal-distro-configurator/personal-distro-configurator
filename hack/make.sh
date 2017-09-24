@@ -34,9 +34,11 @@ run_tests() {
         case "$1" in
             --syntax)
                 bash ./test/shellcheck.sh
+                bash ./test/editorconfig.sh
                 ;;
             --all)
                 bash ./test/shellcheck.sh
+                bash ./test/editorconfig.sh
                 ;;
             *)
                 echo >&2 "error: $1 is a invalid argument"
@@ -77,7 +79,7 @@ run_release() {
         usage >&2
         exit 1
     fi
-    
+
     bash ./release/version.sh "$VERSION"
     bash ./release/authors.sh
     bash ./release/changelog.sh
