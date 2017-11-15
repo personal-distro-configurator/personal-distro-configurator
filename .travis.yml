@@ -1,7 +1,6 @@
-os:
-  - linux
-
-language: bash
+os: linux
+language: node_js
+node_js: 8.9
 
 addons:
   apt:
@@ -9,6 +8,7 @@ addons:
       - debian-sid
     packages:
       - shellcheck
+      - bats
 
 before_script:
   - npm install --only=dev
