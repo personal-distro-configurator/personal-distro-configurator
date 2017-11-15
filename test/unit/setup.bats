@@ -100,10 +100,10 @@ teardown() {
     expected[2]="${pdcyml_settings_path_plugins}/pdc-c-plugin/plugin.yml"
 
     i=0
-    cat "$test_file" | while read line; do
+    while read line; do
         [ "${expected[$i]}" = "$line" ]
         i=$((i + 1))
-    done
+    done < "$test_file"
 }
 
 @test "pdcdef_setup_create_variables_plugins: create variables for all plugins that exists a plugin.yml file" {
@@ -126,11 +126,11 @@ teardown() {
     expected[1]="${pdcyml_settings_path_plugins}/pdc-c-plugin/plugin.yml"
 
     i=0
-    cat "$test_file" | while read line; do
+    while read line; do
         [ "${expected[$i]}" = "$line" ]
         [ "$i" -lt 2 ]
         i=$((i + 1))
-    done
+    done < "$test_file"
 }
 
 # pdcdef_setup_create_variables_user -----------------------------------------
@@ -189,10 +189,10 @@ teardown() {
     expected[2]='file3.yml'
 
     i=0
-    cat "$test_file" | while read line; do
+    while read line; do
         [ "${expected[$i]}" = "$line" ]
         i=$((i + 1))
-    done
+    done < "$test_file"
 }
 
 @test "pdcdef_setup_create_variables_additional: do not create variables" {
@@ -273,10 +273,10 @@ teardown() {
     expected[2]='file3'
 
     i=0
-    cat "$test_file" | while read line; do
+    while read line; do
         [ "${expected[$i]}" = "$line" ]
         i=$((i + 1))
-    done
+    done < "$test_file"
 }
 
 @test "pdcdef_plugin_import: test when import list is empty" {
@@ -317,10 +317,10 @@ teardown() {
     expected[2]='cmd3'
 
     i=0
-    cat "$test_file" | while read line; do
+    while read line; do
         [ "${expected[$i]}" = "$line" ]
         i=$((i + 1))
-    done
+    done < "$test_file"
 }
 
 @test "pdcdef_plugin_setup: test when setup list is empty" {
@@ -361,11 +361,10 @@ teardown() {
     expected[1]='second'
 
     i=0
-    cat "$test_file" | while read line; do
+    while read line; do
         [ "${expected[$i]}" = "$line" ]
-        [ "$i" -lt 2 ]
         i=$((i + 1))
-    done
+    done < "$test_file"
 }
 
 # pdcdef_create_if_not_exists ------------------------------------------------

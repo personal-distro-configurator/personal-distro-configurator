@@ -161,17 +161,15 @@ teardown() {
     run pdcdef_get_plugins
 
     # asserts
-    file_values="$(cat $git_file)"
-
     git_command[0]='https://github.com/user/project.git master'
     git_command[1]='https://git.com/user/project.git '
     git_command[2]='http://git.com/user/project develop'
 
     i=0
-    for cmd in ${file_values[*]}; do
-        [ "${git_command[$i]}" = "$cmd" ]
+    while read line; do
+        [ "${git_command[$i]}" = "$line" ]
         i=$((i + 1))
-    done
+    done < "$(cat "$git_file")"
 
     [ "$status" -eq 0 ]
 }

@@ -137,10 +137,8 @@ teardown() {
     pdcdef_confirm_yaml
 
     # asserts
-    file_values="$(cat $LOG_FILE)"
-
     i=0
-    for value in ${file_values[*]}; do
+    for value in $(cat $LOG_FILE); do
         [ 'setting' = "$value" ]
         i=$((i + 1)) && echo "$i" > "$tcount"
     done
@@ -244,10 +242,8 @@ teardown() {
     pdcdef_confirm_plugins
 
     # asserts
-    file_values="$(cat $LOG_FILE)"
-
     i=0
-    for value in ${file_values[*]}; do
+    for value in $(cat $LOG_FILE); do
         [ 'plugin' = "$value" ]
         i=$((i + 1)) && echo "$i" > "$tcount"
     done
@@ -326,15 +322,15 @@ teardown() {
     run pdcdef_confirm_confirm
 
     # asserts
-    file_values="$(cat $LOG_FILE)"
+    file_content="$(cat "$LOG_FILE")"
 
     expected[0]='Confirm? [Y/n]'
 
     i=0
-    for value in ${file_values[*]}; do
-        [ "${expected[$i]}" = "$value" ]
+    while read line; do
+        [ "${expected[$i]}" = "$line" ]
         i=$((i + 1))
-    done
+    done < "$file_content"
 
     [ "$status" -eq 0 ]
 }
@@ -347,15 +343,15 @@ teardown() {
     run pdcdef_confirm_confirm
 
     # asserts
-    file_values="$(cat $LOG_FILE)"
+    file_content="$(cat "$LOG_FILE")"
 
     expected[0]='Confirm? [Y/n]'
 
     i=0
-    for value in ${file_values[*]}; do
-        [ "${expected[$i]}" = "$value" ]
+    while read line; do
+        [ "${expected[$i]}" = "$line" ]
         i=$((i + 1))
-    done
+    done < "$file_content"
 
     [ "$status" -eq 0 ]
 }
@@ -368,15 +364,15 @@ teardown() {
     run pdcdef_confirm_confirm
 
     # asserts
-    file_values="$(cat $LOG_FILE)"
+    file_content="$(cat "$LOG_FILE")"
 
     expected[0]='Confirm? [Y/n]'
 
     i=0
-    for value in ${file_values[*]}; do
-        [ "${expected[$i]}" = "$value" ]
+    while read line; do
+        [ "${expected[$i]}" = "$line" ]
         i=$((i + 1))
-    done
+    done < "$file_content"
 
     [ "$status" -eq 0 ]
 }
@@ -389,16 +385,16 @@ teardown() {
     run pdcdef_confirm_confirm
 
     # asserts
-    file_values="$(cat $LOG_FILE)"
+    file_content="$(cat "$LOG_FILE")"
 
     expected[0]='Confirm? [Y/n]'
     expected[1]='Canceled by user'
 
     i=0
-    for value in ${file_values[*]}; do
-        [ "${expected[$i]}" = "$value" ]
+    while read line; do
+        [ "${expected[$i]}" = "$line" ]
         i=$((i + 1))
-    done
+    done < "$file_content"
 
     [ "$status" -eq 1 ]
 }

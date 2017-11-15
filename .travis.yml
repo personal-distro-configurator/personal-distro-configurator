@@ -1,6 +1,6 @@
 os: linux
 language: node_js
-node_js: 8.9
+node_js: 8
 
 addons:
   apt:
@@ -10,12 +10,17 @@ addons:
       - shellcheck
       - bats
 
-before_script:
+before_install:
+  - if [[ `npm -v` != 5* ]]; then npm i -g npm@5; fi
+
+install:
   - npm install --only=dev
+
+before_script:
   - chmod +x ./hack/make.sh
 
 script:
-  - ./hack/make.sh test --all
+  - ./hack/make.sh test --syntax --unit
 
 notifications:
   email:
