@@ -3,6 +3,8 @@
 set -e
 cd "$(dirname "$(readlink -f "$0")")"/../../
 
+echo 'Verifying shellcheck syntax...'
+
 if ! type shellcheck > /dev/null; then
     echo >&2 'error: shellcheck not found'
     exit 1
@@ -20,3 +22,5 @@ CHECK+=( 'pdc/sh/utils/log.sh' )
 CHECK+=( 'pdc/sh/utils/yaml.sh' )
 
 shellcheck "${CHECK[@]}" && exit 0
+
+echo 'Shellcheck syntax verified!'
