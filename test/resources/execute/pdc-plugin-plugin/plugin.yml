@@ -1,0 +1,6 @@
+plugins:
+  steps:
+    execute:
+      - touch ${TEMP}/cmd1
+      - touch ${TEMP}/cmd2
+      - touch ${TEMP}/cmd3

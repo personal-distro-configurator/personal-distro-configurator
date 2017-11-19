@@ -1,0 +1,30 @@
+--
+system:
+  distro: "archlinux"
+  arch: "x86_64"
+  wm: "i3"
+
+settings:
+  exclude:
+    - ignore_me
+    - ignore_me_too
+    - another_to_ignore
+
+ignore:
+  me: none
+  me_too: none too
+
+plugins:
+  get:
+    - user/project
+    - https://git.com/user/project.git
+    - git@git.com:user/project.git
+    - path:://path/to/plugin
+    - tarball::endpoint/to/tarbal.tar
+
+another_to_ignore: ignored?
+
+execute:
+  - plugin plugin-name
+  - bash myFile.sh
+  - shell echo something
