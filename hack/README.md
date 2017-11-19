@@ -12,11 +12,15 @@ For help, use:
 
 ### Test
 
-Currently, tests only check for syntax, but in future, unit tests and docker tests will be added.
+Run tests with:
 
-To test, run:
+    make.sh test [OPTIONS]
 
-    make.sh test
+Currently options avaliable:
+
+- --syntax: Shellcheck and Editorconfig syntax validate.
+- --unit: Unit tests, running with bats.
+- --all: All tests.
 
 ### Release
 
