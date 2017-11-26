@@ -339,6 +339,52 @@ teardown() {
     [ ! -f "$test_file" ]
 }
 
+# pdcdef_imports -------------------------------------------------------------
+@test "pdcdef_imports: must import one file" {
+    # variables
+    file1="${RESOURCES}/setup/sh/file1.sh"
+
+    # mocks
+    pdcyml_import=( "$file1" )
+
+    # run
+    run pdcdef_imports
+
+    # asserts
+    [ "$status" -eq 0 ]
+    [ -f "${TEMP}/file1" ]
+}
+
+@test "pdcdef_imports: must import many files" {
+    # variables
+    file1="${RESOURCES}/setup/sh/file1.sh"
+    file2="${RESOURCES}/setup/sh/file2.sh"
+    file3="${RESOURCES}/setup/sh/file3.sh"
+
+    # mocks
+    pdcyml_import=( "$file1" "$file2" "$file3" )
+
+    # run
+    run pdcdef_imports
+
+    # asserts
+    [ "$status" -eq 0 ]
+    [ -f "${TEMP}/file1" ]
+    [ -f "${TEMP}/file2" ]
+    [ -f "${TEMP}/file3" ]
+}
+
+@test "pdcdef_imports: must run without import any file" {
+    # mocks
+    pdcyml_import=( )
+
+    # run
+    run pdcdef_imports
+
+    # asserts
+    [ "$status" -eq 0 ]
+}
+
 # pdcdef_create_paths --------------------------------------------------------
 @test "pdcdef_create_paths: test call functions and order" {
     # variables
