@@ -75,6 +75,15 @@ function pdcdef_plugin_setup() {
     done
 }
 
+# Imports
+# -------
+
+function pdcdef_imports() {
+    for imp in "${pdcyml_import[@]}"; do
+        source "$imp"
+    done
+}
+
 # Setup Configs
 # -------------
 
