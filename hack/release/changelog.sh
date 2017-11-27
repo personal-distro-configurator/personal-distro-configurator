@@ -11,6 +11,8 @@ FILE='CHANGELOG.md'
 OLD_CHANGELOG=$(sed '/^*Auto-generated/ d' < "$FILE")
 LINK_PULL_REQUESTS='https://github.com/personal-distro-configurator/personal-distro-configurator/pull/'
 
+echo 'Updating CHANGELOG...'
+
 # Verify if everything is ok to update changelog
 # VERSION file must be not empty
 if [ -z "$VERSION" ]; then
@@ -68,5 +70,9 @@ done
 echo "" >> "$FILE"
 echo "$OLD_CHANGELOG" >> "$FILE"
 
+echo 'CHANGELOG file updated with success!'
+
+echo 'Cleaning old changelogs...'
 # Clean changelogs writed to CHANGELOG file
 rm changelogs/*
+echo 'Clean ok!'

@@ -21,14 +21,16 @@ function pdcdef_setup_create_variables_default() {
 # Read and create variables from plugin.yml files,
 # found on root of every plugin folder
 function pdcdef_setup_create_variables_plugins() {
-    if [ -d "${pdcyml_settings_path_plugins}" ]; then
-        for entry in ${pdcyml_settings_path_plugins}/*; do
+    if [ -d "$pdcyml_settings_path_plugins" ]; then
+        for entry in $pdcyml_settings_path_plugins/*; do
             [ -d "$entry" ] &&
             [ "$(ls "$entry")" ] &&
             [ -f "${entry}/plugin.yml" ] &&
             pdcdef_create_variables "${entry}/plugin.yml"
         done
     fi
+
+    return 0
 }
 
 # Read and create variables from pdc.yml user file
@@ -40,10 +42,12 @@ function pdcdef_setup_create_variables_user() {
 # All *.yml files can informe additionals *.yml files to be read
 # Here these files will be read and created variables
 function pdcdef_setup_create_variables_additional() {
-    for yaml_file in $pdcyml_yaml_files; do
+    for yaml_file in ${pdcyml_yaml_files[*]}; do
         log_verbose "Add ${yaml_file} settings file" && log_verbose
         pdcdef_create_variables "$yaml_file"
     done
+
+    return 0
 }
 
 # Call each function to create variables from *.yml files
@@ -68,6 +72,15 @@ function pdcdef_plugin_import() {
 function pdcdef_plugin_setup() {
     for i in ${!pdcyml_plugins_steps_setup[*]}; do
         eval "${pdcyml_plugins_steps_setup[i]}"
+    done
+}
+
+# Imports
+# -------
+
+function pdcdef_imports() {
+    for imp in "${pdcyml_import[@]}"; do
+        source "$imp"
     done
 }
 

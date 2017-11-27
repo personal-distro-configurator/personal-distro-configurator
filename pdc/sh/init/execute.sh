@@ -28,7 +28,7 @@ function pdcdef_execute_shell() {
 #
 function pdcdef_execute_sh() {
     local sh_file=$1
-    sh "$sh_file"
+    eval "sh $sh_file"
 }
 
 # Run a bash file, if it as arguments, is informed too
@@ -37,7 +37,7 @@ function pdcdef_execute_sh() {
 #
 function pdcdef_execute_bash() {
     local bash_file=$1
-    bash "$bash_file"
+    eval "bash $bash_file"
 }
 
 # Run execute list from a plugin
@@ -51,8 +51,8 @@ function pdcdef_execute_plugin() {
 
     cmd="$(pdcdef_load_settings "${pdcyml_settings_path_plugins}/pdc-${plugin}-plugin/plugin.yml" pdcyml_plugins_steps_execute)"
 
-    for c in ${cmd[*]}; do
-        eval "$(cut -d '=' -f2 <<< "$c")"
+    for c in "${cmd[@]}"; do
+        eval "$(cut -d '=' -f2 <<< "$c" | sed 's/")$//' | sed 's/^("//' )"
     done
 }
 

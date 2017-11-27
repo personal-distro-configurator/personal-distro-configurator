@@ -1,7 +1,9 @@
-os:
-  - linux
+language:
+  - bash
+  - node_js
 
-language: bash
+os: linux
+node_js: 8
 
 addons:
   apt:
@@ -9,9 +11,20 @@ addons:
       - debian-sid
     packages:
       - shellcheck
+      - bats
+
+before_install:
+  - if [[ `npm -v` != 5* ]]; then npm i -g npm@5; fi
+
+install:
+  - npm install --only=dev
 
 before_script:
   - chmod +x ./hack/make.sh
 
 script:
-  - ./hack/make.sh test
+  - ./hack/make.sh test --syntax --unit
+
+notifications:
+  email:
+    on_success: never

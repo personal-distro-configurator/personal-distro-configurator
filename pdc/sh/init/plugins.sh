@@ -17,13 +17,14 @@
 #
 function pdcdef_clone_plugin() {
     local git_project_url=$1
+    local ibranch=$2
     local branch=""
-    local cmd="git clone ${git_project_url} ${branch} --depth 1"
+    local gitclone=""
 
-    # if branch is informed in arg2, set to clone it
-    branch=$([[ -n "${pdcyml_system_wm/[ ]*\n/}" ]] && echo "--branch $2")
+    branch=$([[ -n "${ibranch/[ ]*\n/}" ]] && echo "--branch $ibranch")
+    gitclone="git clone ${git_project_url} ${branch} --depth 1"
 
-    cd "$pdcyml_settings_path_plugins" && $cmd; cd - || exit 1;
+    cd "$pdcyml_settings_path_plugins" && $gitclone; cd - || exit 1;
 }
 
 # Download compressed plugin (tarbal, zip, rar, etc)
@@ -47,12 +48,12 @@ function pdcdef_get_plugins() {
 
             # Git HTTP Clone
             http://*)
-                pdcdef_clone_plugin "$(cut -d ':' -f1 <<< "$plugin")" "$(cut -d ':' -f2 <<< "$plugin")"
+                pdcdef_clone_plugin "http:$(cut -d ':' -f2 <<< "$plugin")" "$(cut -d ':' -f3 <<< "$plugin")"
             ;;
 
             # Git HTTPS Clone
             https://*)
-                pdcdef_clone_plugin "$(cut -d ':' -f1 <<< "$plugin")" "$(cut -d ':' -f2 <<< "$plugin")"
+                pdcdef_clone_plugin "https:$(cut -d ':' -f2 <<< "$plugin")" "$(cut -d ':' -f3 <<< "$plugin")"
             ;;
 
             # Git SSH Clone
@@ -72,7 +73,7 @@ function pdcdef_get_plugins() {
 
             # GitHub Plugin Clone
             *)
-                pdcdef_clone_plugin "https://github.com/$(cut -d ':' -f1 <<< "$plugin").git" "$(cut -d ':' -f2 <<< "$plugin")"
+                pdcdef_clone_plugin "https://github.com/$(cut -d ':' -f1 <<< "$plugin").git" "$([ -z "${plugin##*:*}" ] && cut -d ':' -f2 <<< "$plugin")"
             ;;
         esac
     done

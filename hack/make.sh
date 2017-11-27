@@ -10,6 +10,7 @@ usage() {
     echo
     echo 'test                                   execute tests informed by arument'
     echo '  --syntax                             validate syntax with shellcheck'
+    echo '  --unit                               unit tests'
     echo '  --all                                run every tests'
     echo
     echo 'release                                configure files for a release version, such as authors, changelog and version'
@@ -20,7 +21,7 @@ usage() {
 
 # -- SCRIPTS -----------------------------------------------------------------
 run_tests() {
-    declare -A tests=( ['--syntax']=0 ['--all']=0 )
+    declare -A tests=( ['--syntax']=0 ['--unit']=0 ['--all']=0 )
 
     for arg in "$@"; do
         if [[ -z "${tests[$arg]}" ]]; then
@@ -34,9 +35,15 @@ run_tests() {
         case "$1" in
             --syntax)
                 bash ./test/shellcheck.sh
+                bash ./test/editorconfig.sh
+                ;;
+            --unit)
+                bash ./test/unit.sh
                 ;;
             --all)
                 bash ./test/shellcheck.sh
+                bash ./test/editorconfig.sh
+                bash ./test/unit.sh
                 ;;
             *)
                 echo >&2 "error: $1 is a invalid argument"
@@ -77,7 +84,7 @@ run_release() {
         usage >&2
         exit 1
     fi
-    
+
     bash ./release/version.sh "$VERSION"
     bash ./release/authors.sh
     bash ./release/changelog.sh

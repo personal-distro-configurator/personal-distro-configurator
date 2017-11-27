@@ -1,4 +1,13 @@
 *Auto-generated file from hack/release/changelog.sh*
+## 0.0.5 (2017-11-26)
+
+- Continuous integration updated 
+- Fix bash and sh executions [#48](https://github.com/personal-distro-configurator/personal-distro-configurator/pull/48)
+- Fix import files that do not exists [#47](https://github.com/personal-distro-configurator/personal-distro-configurator/pull/47)
+- Add option on yaml file to import sh files [#49](https://github.com/personal-distro-configurator/personal-distro-configurator/pull/49)
+- Remove utilies folder, with download and install script [#52](https://github.com/personal-distro-configurator/personal-distro-configurator/pull/52)
+- Add unit tests [#46](https://github.com/personal-distro-configurator/personal-distro-configurator/pull/46)
+
 ## 0.0.4 (2017-09-19)
 
 - Add plugin version by git branch or tag [#33](https://github.com/personal-distro-configurator/personal-distro-configurator/pull/33)
