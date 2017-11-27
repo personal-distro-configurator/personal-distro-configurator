@@ -21,8 +21,8 @@ function pdcdef_setup_create_variables_default() {
 # Read and create variables from plugin.yml files,
 # found on root of every plugin folder
 function pdcdef_setup_create_variables_plugins() {
-    if [ -d "$pdcyml_settings_path_plugins" ]; then
-        for entry in $pdcyml_settings_path_plugins/*; do
+    if [ -d "$pdcyml_path_plugins" ]; then
+        for entry in $pdcyml_path_plugins/*; do
             [ -d "$entry" ] &&
             [ "$(ls "$entry")" ] &&
             [ -f "${entry}/plugin.yml" ] &&
@@ -35,8 +35,8 @@ function pdcdef_setup_create_variables_plugins() {
 
 # Read and create variables from pdc.yml user file
 function pdcdef_setup_create_variables_user() {
-    [ -f "${pdcyml_settings_path_install}/pdc.yml" ] &&
-    pdcdef_create_variables "${pdcyml_settings_path_install}/pdc.yml"
+    [ -f "${pdcyml_path_root}/pdc.yml" ] &&
+    pdcdef_create_variables "${pdcyml_path_root}/pdc.yml"
 }
 
 # All *.yml files can informe additionals *.yml files to be read
@@ -89,8 +89,8 @@ function pdcdef_imports() {
 
 # Create paths from configs
 function pdcdef_create_paths() {
-    pdcdef_create_if_not_exists "$pdcyml_settings_path_install"
-    pdcdef_create_if_not_exists "$pdcyml_settings_path_log"
+    pdcdef_create_if_not_exists "$pdcyml_path_root"
+    pdcdef_create_if_not_exists "$pdcyml_path_log"
 }
 
 # Valid and create folder, if not exists

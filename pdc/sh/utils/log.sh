@@ -8,7 +8,7 @@
 #
 function pdcdef_log() {
     local msg=$1
-    echo "$msg" | tee -a "$pdcyml_settings_path_log/$pdcyml_settings_file_log"
+    echo "$msg" | tee -a "$pdcyml_path_log/$pdcyml_settings_log_file"
 }
 
 # Public function to output something and log it
@@ -19,13 +19,13 @@ function log_info() {
     local msg=$1
 
     # Create log folder if not exists
-    if [ ! -d "$pdcyml_settings_path_log" ]; then
-        mkdir -p "$pdcyml_settings_path_log"
+    if [ ! -d "$pdcyml_path_log" ]; then
+        mkdir -p "$pdcyml_path_log"
     fi
 
     # Create log file if not exists
-    if [ ! -f "$pdcyml_settings_path_log/$pdcyml_settings_file_log" ]; then
-        touch "$pdcyml_settings_path_log/$pdcyml_settings_file_log"
+    if [ ! -f "$pdcyml_path_log/$pdcyml_settings_log_file" ]; then
+        touch "$pdcyml_path_log/$pdcyml_settings_log_file"
     fi
 
     # write the log

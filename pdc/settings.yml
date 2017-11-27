@@ -3,13 +3,6 @@ settings:
   yaml:
     exclude:
       - pdcyml_plugins_steps_execute
-  path:
-    install: ../
-    log: ${pdcyml_settings_path_install}/log/
-    tmp: ${pdcyml_settings_path_install}/tmp/
-    resources: ${pdcyml_settings_path_install}/resources
-    scripts: ${pdcyml_settings_path_install}/scripts
-    plugins: ${pdcyml_settings_path_install}/plugins
   file:
     log: install.log
 
@@ -26,6 +19,14 @@ executors:
   -
     command: plugin
     function: pdcdef_execute_plugin
+
+path:
+  root: ../
+  log: ${pdcyml_path_root}/log/
+  tmp: ${pdcyml_path_root}/tmp/
+  resources: ${pdcyml_path_root}/resources/
+  scripts: ${pdcyml_path_root}/scripts/
+  plugins: ${pdcyml_path_root}/plugins/
 
 system:
   distro:

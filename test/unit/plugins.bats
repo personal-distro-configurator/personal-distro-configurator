@@ -21,7 +21,7 @@ teardown() {
 
     # mocks
     git() { touch "$git_file" && echo "git $@" >> "$git_file"; }
-    pdcyml_settings_path_plugins="${TEMP}"
+    pdcyml_path_plugins="${TEMP}"
 
     # run
     run pdcdef_clone_plugin "$git_url" "$git_branch"
@@ -37,7 +37,7 @@ teardown() {
 
     # mocks
     git() { touch "$git_file" && echo "git $@" >> "$git_file"; }
-    pdcyml_settings_path_plugins="${TEMP}"
+    pdcyml_path_plugins="${TEMP}"
 
     # run
     run pdcdef_clone_plugin "$git_url"

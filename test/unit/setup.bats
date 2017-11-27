@@ -36,7 +36,7 @@ teardown() {
     test_file="${TEMP}/test_file"
 
     # mocks
-    pdcyml_settings_path_plugins="${RESOURCES}/setup/plugins/one"
+    pdcyml_path_plugins="${RESOURCES}/setup/plugins/one"
     pdcdef_create_variables() { echo "$1" > "$test_file" ; }
 
     # run
@@ -44,7 +44,7 @@ teardown() {
 
     # asserts
     [ "$status" -eq 0 ]
-    [ "$(cat "$test_file")" = "${pdcyml_settings_path_plugins}/pdc-a-plugin/plugin.yml" ]
+    [ "$(cat "$test_file")" = "${pdcyml_path_plugins}/pdc-a-plugin/plugin.yml" ]
 }
 
 @test "pdcdef_setup_create_variables_plugins: dont create variables when plugin.yml not found" {
@@ -52,7 +52,7 @@ teardown() {
     test_file="${TEMP}/test_file"
 
     # mocks
-    pdcyml_settings_path_plugins="${RESOURCES}/setup/plugins/zero"
+    pdcyml_path_plugins="${RESOURCES}/setup/plugins/zero"
     pdcdef_create_variables() { echo "$1" > "$test_file" ; }
 
     # run
@@ -68,7 +68,7 @@ teardown() {
     test_file="${TEMP}/test_file"
 
     # mocks
-    pdcyml_settings_path_plugins="${RESOURCES}/setup/plugins/none"
+    pdcyml_path_plugins="${RESOURCES}/setup/plugins/none"
     pdcdef_create_variables() { echo "$1" > "$test_file" ; }
 
     # run
@@ -84,7 +84,7 @@ teardown() {
     test_file="${TEMP}/test_file"
 
     # mocks
-    pdcyml_settings_path_plugins="${RESOURCES}/setup/plugins/many"
+    pdcyml_path_plugins="${RESOURCES}/setup/plugins/many"
     pdcdef_create_variables() { echo "$1" >> "$test_file" ; }
 
     # run
@@ -95,9 +95,9 @@ teardown() {
     [ -f "$test_file" ]
     [ "$(cat $test_file)" != '' ]
 
-    expected[0]="${pdcyml_settings_path_plugins}/pdc-a-plugin/plugin.yml"
-    expected[1]="${pdcyml_settings_path_plugins}/pdc-b-plugin/plugin.yml"
-    expected[2]="${pdcyml_settings_path_plugins}/pdc-c-plugin/plugin.yml"
+    expected[0]="${pdcyml_path_plugins}/pdc-a-plugin/plugin.yml"
+    expected[1]="${pdcyml_path_plugins}/pdc-b-plugin/plugin.yml"
+    expected[2]="${pdcyml_path_plugins}/pdc-c-plugin/plugin.yml"
 
     i=0
     while read line; do
@@ -111,7 +111,7 @@ teardown() {
     test_file="${TEMP}/test_file"
 
     # mocks
-    pdcyml_settings_path_plugins="${RESOURCES}/setup/plugins/some"
+    pdcyml_path_plugins="${RESOURCES}/setup/plugins/some"
     pdcdef_create_variables() { echo "$1" >> "$test_file" ; }
 
     # run
@@ -122,8 +122,8 @@ teardown() {
     [ -f "$test_file" ]
     [ "$(cat $test_file)" != '' ]
 
-    expected[0]="${pdcyml_settings_path_plugins}/pdc-a-plugin/plugin.yml"
-    expected[1]="${pdcyml_settings_path_plugins}/pdc-c-plugin/plugin.yml"
+    expected[0]="${pdcyml_path_plugins}/pdc-a-plugin/plugin.yml"
+    expected[1]="${pdcyml_path_plugins}/pdc-c-plugin/plugin.yml"
 
     i=0
     while read line; do
@@ -139,7 +139,7 @@ teardown() {
     test_file="${TEMP}/test_file"
 
     # mocks
-    pdcyml_settings_path_install="${RESOURCES}/setup"
+    pdcyml_path_root="${RESOURCES}/setup"
     pdcdef_create_variables() { echo "$1" > "$test_file" ; }
 
     # run
@@ -148,7 +148,7 @@ teardown() {
     # asserts
     [ "$status" -eq 0 ]
     [ -f "$test_file" ]
-    [ "$(cat "$test_file")" = "${pdcyml_settings_path_install}/pdc.yml" ]
+    [ "$(cat "$test_file")" = "${pdcyml_path_root}/pdc.yml" ]
 }
 
 @test "pdcdef_setup_create_variables_user: do not create variables when pdc.yml not found" {
@@ -156,7 +156,7 @@ teardown() {
     test_file="${TEMP}/test_file"
 
     # mocks
-    pdcyml_settings_path_install="${TEMP}"
+    pdcyml_path_root="${TEMP}"
     pdcdef_create_variables() { echo "$1" > "$test_file" ; }
 
     # run
@@ -391,8 +391,8 @@ teardown() {
     test_file="${TEMP}/test_file"
 
     # mocks
-    pdcyml_settings_path_install='first'
-    pdcyml_settings_path_log='second'
+    pdcyml_path_root='first'
+    pdcyml_path_log='second'
     pdcdef_create_if_not_exists() { echo "$1" >> "$test_file" ; }
 
     # run

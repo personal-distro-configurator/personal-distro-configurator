@@ -46,8 +46,8 @@ teardown() {
     plugin_command="(\"touch $plugin_file\")"
 
     # mocks
-    pdcyml_settings_path_plugins="${TEMP}"
-    expected_plugin_path="${pdcyml_settings_path_plugins}/pdc-${plugin}-plugin/plugin.yml"
+    pdcyml_path_plugins="${TEMP}"
+    expected_plugin_path="${pdcyml_path_plugins}/pdc-${plugin}-plugin/plugin.yml"
 
     pdcdef_load_settings() {
         [ "$1" = "$expected_plugin_path" ] &&
@@ -69,8 +69,8 @@ teardown() {
 
     # mocks
     source "${PDC_FOLDER}/sh/utils/yaml.sh"
-    pdcyml_settings_path_plugins="${RESOURCES}/execute"
-    expected_plugin_path="${pdcyml_settings_path_plugins}/pdc-${plugin}-plugin"
+    pdcyml_path_plugins="${RESOURCES}/execute"
+    expected_plugin_path="${pdcyml_path_plugins}/pdc-${plugin}-plugin"
     expected_plugin_file="${expected_plugin_path}/plugin.yml"
 
     # run
