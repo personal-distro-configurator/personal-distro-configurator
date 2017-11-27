@@ -67,14 +67,14 @@ function pdcdef_execute() {
     for execution in "${pdcyml_execute[@]}"; do
 
         # Find executor for execute command
-        for i in ${!pdcyml_settings_executors__command[*]}; do
+        for i in ${!pdcyml_executors__command[*]}; do
 
             # test if executor is what was informed
-            if [ "${pdcyml_settings_executors__command[$i]}" = "$(cut -d ' ' -f1 <<< "$execution")" ]; then
+            if [ "${pdcyml_executors__command[$i]}" = "$(cut -d ' ' -f1 <<< "$execution")" ]; then
 
                 # if is, call function for this command,
                 # passing all arguments informed
-                "${pdcyml_settings_executors__function[$i]}" "${execution#${pdcyml_settings_executors__command[$i]} }"
+                "${pdcyml_executors__function[$i]}" "${execution#${pdcyml_executors__command[$i]} }"
             fi
         done
     done
