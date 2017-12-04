@@ -24,7 +24,7 @@ function pdcdef_clone_plugin() {
     branch=$([[ -n "${ibranch/[ ]*\n/}" ]] && echo "--branch $ibranch")
     gitclone="git clone ${git_project_url} ${branch} --depth 1"
 
-    cd "$pdcyml_settings_path_plugins" && $gitclone; cd - || exit 1;
+    cd "$pdcyml_path_plugins" && $gitclone; cd - || exit 1;
 }
 
 # Download compressed plugin (tarbal, zip, rar, etc)

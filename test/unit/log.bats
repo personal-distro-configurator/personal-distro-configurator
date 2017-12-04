@@ -6,11 +6,11 @@ setup() {
     super_setup
     source "${PDC_FOLDER}/sh/utils/log.sh"
 
-    export pdcyml_settings_path_log="$TEMP"
-    export pdcyml_settings_file_log='install.log'
+    export pdcyml_path_log="$TEMP"
+    export pdcyml_settings_log_file='install.log'
     export pdcyml_settings_verbose=false
 
-    export LOG_FILE="${pdcyml_settings_path_log}/${pdcyml_settings_file_log}"
+    export LOG_FILE="${pdcyml_path_log}/${pdcyml_settings_log_file}"
 }
 
 teardown() {
@@ -43,33 +43,33 @@ teardown() {
 }
 
 @test "log_info: create log folder if not exist" {
-    pdcyml_settings_path_log="${TEMP}/logfolder"
+    pdcyml_path_log="${TEMP}/logfolder"
     log_info 'test 123'
 
-    [ -d "$pdcyml_settings_path_log" ]
+    [ -d "$pdcyml_path_log" ]
 }
 
 @test "log_info: create log file if not exist" {
-    pdcyml_settings_path_log="${TEMP}/logfolder"
-    mkdir "$pdcyml_settings_path_log"
+    pdcyml_path_log="${TEMP}/logfolder"
+    mkdir "$pdcyml_path_log"
     log_info 'test 123'
 
-    [ -f "${pdcyml_settings_path_log}/${pdcyml_settings_file_log}" ]
+    [ -f "${pdcyml_path_log}/${pdcyml_settings_log_file}" ]
 }
 
 @test "log_info: when log folder don't exist, log file must be updated" {
-    pdcyml_settings_path_log="${TEMP}/logfolder"
+    pdcyml_path_log="${TEMP}/logfolder"
     log_info 'test 123'
 
-    [ "$(cat ${pdcyml_settings_path_log}/${pdcyml_settings_file_log})" = 'test 123' ]
+    [ "$(cat ${pdcyml_path_log}/${pdcyml_settings_log_file})" = 'test 123' ]
 }
 
 @test "log_info: when log file don't exist, it must be created and updated" {
-    pdcyml_settings_path_log="${TEMP}/logfolder"
-    mkdir "$pdcyml_settings_path_log"
+    pdcyml_path_log="${TEMP}/logfolder"
+    mkdir "$pdcyml_path_log"
     log_info 'test 123'
 
-    [ "$(cat ${pdcyml_settings_path_log}/${pdcyml_settings_file_log})" = 'test 123' ]
+    [ "$(cat ${pdcyml_path_log}/${pdcyml_settings_log_file})" = 'test 123' ]
 }
 
 # log_verbose ----------------------------------------------------------------

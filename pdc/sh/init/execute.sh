@@ -49,7 +49,7 @@ function pdcdef_execute_plugin() {
 
     local cmd
 
-    cmd="$(pdcdef_load_settings "${pdcyml_settings_path_plugins}/pdc-${plugin}-plugin/plugin.yml" pdcyml_plugins_steps_execute)"
+    cmd="$(pdcdef_load_settings "${pdcyml_path_plugins}/pdc-${plugin}-plugin/plugin.yml" pdcyml_plugins_steps_execute)"
 
     for c in "${cmd[@]}"; do
         eval "$(cut -d '=' -f2 <<< "$c" | sed 's/")$//' | sed 's/^("//' )"
