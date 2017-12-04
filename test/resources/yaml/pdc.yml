@@ -5,10 +5,11 @@ system:
   wm: "i3"
 
 settings:
-  exclude:
-    - ignore_me
-    - ignore_me_too
-    - another_to_ignore
+  yaml:
+    exclude:
+      - pdcyml_ignore_me
+      - pdcyml_ignore_me_too
+      - pdcyml_another_to_ignore
 
 ignore:
   me: none

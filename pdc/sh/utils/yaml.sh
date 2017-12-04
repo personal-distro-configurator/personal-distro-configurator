@@ -63,10 +63,13 @@ function pdcdef_create_variables() {
     local settings
 
     variables="$(parse_yaml "$yaml_file" pdcyml_)"
-    exclude="$(pdcdef_load_settings "$yaml_file" pdcyml_settings_exclude)"
+    exclude="$(pdcdef_load_settings "$yaml_file" 'pdcyml_settings_yaml_exclude')"
 
     for e in ${exclude[*]}; do
-        settings+=( "$(sed "s/\b$e\b//g" <<< "$variables")" )
+        e="${e//pdcyml_settings_yaml_exclude+=\(\"/}"
+        e="${e//\"\)/}"
+
+        variables="$(sed -e "s/^$e=.*//g" -e "s/^$e+=.*//g" <<< "$variables")"
     done
 
     eval "$variables"
@@ -83,15 +86,15 @@ function pdcdef_create_variables() {
 function pdcdef_load_settings() {
     local yaml_file=$1
     local settings_to_load=$2
+    local prefix='pdcyml_'
 
     local settings
     local variables
 
-    variables="$(parse_yaml "$yaml_file" pdcyml_)"
+    variables="$(parse_yaml "$yaml_file" "$prefix")"
 
-    for setting in $settings_to_load; do
-        settings+=( "$(grep "^${setting}=" <<< "$variables")" )
-        settings+=( "$(grep "^${setting}+=" <<< "$variables")" )
+    for setting in ${settings_to_load[*]}; do
+        settings+=( "$(grep -i -e "^${setting}=" -e "^${setting}+=" <<< "$variables")" )
     done
 
     sed 's/ $//' <<< "${settings[@]}"
