@@ -12,19 +12,20 @@ settings:
     plugins: ${pdcyml_settings_path_install}/plugins
   file:
     log: install.log
-  executors:
-    -
-      command: shell
-      function: pdcdef_execute_shell
-    -
-      command: sh
-      function: pdcdef_execute_sh
-    -
-      command: bash
-      function: pdcdef_execute_bash
-    -
-      command: plugin
-      function: pdcdef_execute_plugin
+
+executors:
+  -
+    command: shell
+    function: pdcdef_execute_shell
+  -
+    command: sh
+    function: pdcdef_execute_sh
+  -
+    command: bash
+    function: pdcdef_execute_bash
+  -
+    command: plugin
+    function: pdcdef_execute_plugin
 
 system:
   distro:
