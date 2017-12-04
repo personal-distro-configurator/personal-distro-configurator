@@ -1,5 +1,8 @@
 settings:
   verbose: false
+  yaml:
+    exclude:
+      - pdcyml_plugins_steps_execute
   path:
     install: ../
     log: ${pdcyml_settings_path_install}/log/
@@ -22,8 +25,6 @@ settings:
     -
       command: plugin
       function: pdcdef_execute_plugin
-  exclude:
-    - plugins_steps_execute
 
 system:
   distro:
