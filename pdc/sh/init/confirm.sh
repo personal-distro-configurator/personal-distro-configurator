@@ -18,23 +18,6 @@ function pdcdef_confirm_header() {
     log_info
 }
 
-# Distribution informations, only what are configured
-function pdcdef_confirm_distro() {
-    [[ -n "${pdcyml_system_distro/[ ]*\n/}" ]] &&
-    log_info "# Distro   : $pdcyml_system_distro"
-
-    [[ -n "${pdcyml_system_version/[ ]*\n/}" ]] &&
-    log_info "# Version  : $pdcyml_system_version"
-
-    [[ -n "${pdcyml_system_arch/[ ]*\n/}" ]] &&
-    log_info "# Arch     : $pdcyml_system_arch"
-
-    [[ -n "${pdcyml_system_wm/[ ]*\n/}" ]] &&
-    log_info "# WM       : $pdcyml_system_wm"
-
-    log_info
-}
-
 # [VERBOSE] yaml files to be added
 function pdcdef_confirm_yaml() {
     [ ! ${#pdcyml_yaml_files[@]} -eq 0 ] &&

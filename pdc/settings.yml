@@ -28,12 +28,6 @@ path:
   scripts: ${pdcyml_path_root}/scripts/
   plugins: ${pdcyml_path_root}/plugins/
 
-system:
-  distro:
-  version:
-  arch:
-  wm:
-
 yaml_files:
   -
 

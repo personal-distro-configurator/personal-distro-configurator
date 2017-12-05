@@ -1,9 +1,4 @@
 --
-system:
-  distro: "archlinux"
-  arch: "x86_64"
-  wm: "i3"
-
 plugins:
   get:
     - user/project
