@@ -145,7 +145,7 @@ teardown() {
     i=0
 
     # mocks
-    pdcyml_plugins_get=( 'ok1' 'ok2' 'ok3' )
+    pdcyml_plugins=( 'ok1' 'ok2' 'ok3' )
     log_info() { echo ; }
     log_verbose() { [ "$i" -eq 0 ] && echo "$1" >> "$LOG_FILE" ; ((i+=1)) ; }
 
@@ -161,7 +161,7 @@ teardown() {
     tcount="${TEMP}/tcount"
 
     # mocks
-    pdcyml_plugins_get=( 'plugin' 'plugin' 'plugin' 'plugin' 'plugin' )
+    pdcyml_plugins=( 'plugin' 'plugin' 'plugin' 'plugin' 'plugin' )
     log_info() { echo ; }
     log_verbose() { [ "$1" = 'plugin' ] && echo "$1" >> "$LOG_FILE" ; }
 
@@ -184,7 +184,7 @@ teardown() {
     verbose_file="${TEMP}/verbose_file"
 
     # mocks
-    pdcyml_plugins_get=( 'plugin' 'plugin' 'plugin' 'plugin' 'plugin' )
+    pdcyml_plugins=( 'plugin' 'plugin' 'plugin' 'plugin' 'plugin' )
     log_info() { touch "$log_file" ; }
     log_verbose() { touch "$verbose_file" ; }
 

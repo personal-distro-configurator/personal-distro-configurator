@@ -28,6 +28,7 @@ path:
   scripts: ${pdcyml_path_root}/scripts/
   plugins: ${pdcyml_path_root}/plugins/
 
+--
 yaml_files:
   -
 
@@ -38,8 +39,10 @@ execute:
   -
 
 plugins:
-  get:
-    -
+  -
+
+--
+plugin:
   steps:
     import:
       -

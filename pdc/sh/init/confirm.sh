@@ -40,11 +40,11 @@ function pdcdef_confirm_executions() {
 
 # [VERBOSE] list of plugins to get
 function pdcdef_confirm_plugins() {
-    [ ! ${#pdcyml_plugins_get[@]} -eq 0 ] &&
-    log_verbose "# Plugins add (${#pdcyml_plugins_get[@]}):" &&
+    [ ! ${#pdcyml_plugins[@]} -eq 0 ] &&
+    log_verbose "# Plugins add (${#pdcyml_plugins[@]}):" &&
     log_verbose
 
-    for yaml_file in ${pdcyml_plugins_get[*]}; do
+    for yaml_file in ${pdcyml_plugins[*]}; do
         log_verbose "$yaml_file"
     done
 }
