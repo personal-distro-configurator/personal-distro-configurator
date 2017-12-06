@@ -51,7 +51,7 @@ teardown() {
 
     pdcdef_load_settings() {
         [ "$1" = "$expected_plugin_path" ] &&
-        [ "$2" = 'pdcyml_plugins_steps_execute' ] &&
+        [ "$2" = 'pdcyml_plugin_execute' ] &&
         settings="pdcyml_ok="$plugin_command"" &&
         echo "${settings[@]}" ;
     }

@@ -199,7 +199,7 @@ teardown() {
 # pdcdef_confirm_plugins_step ------------------------------------------------
 @test "pdcdef_confirm_plugins_step: do not confirm when nothing to confirm" {
     # mocks
-    pdcyml_plugins_steps_confirm=( )
+    pdcyml_plugin_confirm=( )
 
     # run
     run pdcdef_confirm_plugins_step
@@ -213,7 +213,7 @@ teardown() {
     test_file="${TEMP}/test_file"
 
     # mocks
-    pdcyml_plugins_steps_confirm=( 'touch "$test_file"' )
+    pdcyml_plugin_confirm=( 'touch "$test_file"' )
 
     # run
     pdcdef_confirm_plugins_step
@@ -229,7 +229,7 @@ teardown() {
     test_file3="${TEMP}/test_file3"
 
     # mocks
-    pdcyml_plugins_steps_confirm=( 'touch "$test_file1"' 'touch "$test_file2"' 'touch "$test_file3"' )
+    pdcyml_plugin_confirm=( 'touch "$test_file1"' 'touch "$test_file2"' 'touch "$test_file3"' )
 
     # run
     pdcdef_confirm_plugins_step

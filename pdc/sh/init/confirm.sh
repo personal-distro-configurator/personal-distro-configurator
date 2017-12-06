@@ -51,8 +51,8 @@ function pdcdef_confirm_plugins() {
 
 # Confirm step from plugins
 function pdcdef_confirm_plugins_step() {
-    for i in ${!pdcyml_plugins_steps_confirm[*]}; do
-        eval "${pdcyml_plugins_steps_confirm[i]}"
+    for i in ${!pdcyml_plugin_confirm[*]}; do
+        eval "${pdcyml_plugin_confirm[i]}"
     done
 }
 

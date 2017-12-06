@@ -258,7 +258,7 @@ teardown() {
 
     # mocks
     source() { echo "$1" >> "$test_file" ; }
-    pdcyml_plugins_steps_import=( 'file1' 'file2' 'file3' )
+    pdcyml_plugin_import=( 'file1' 'file2' 'file3' )
 
     # run
     run pdcdef_plugin_import
@@ -285,7 +285,7 @@ teardown() {
 
     # mocks
     source() { touch "$test_file" ; }
-    pdcyml_plugins_steps_import=()
+    pdcyml_plugin_import=()
 
     # run
     run pdcdef_plugin_import
@@ -302,7 +302,7 @@ teardown() {
 
     # mocks
     eval() { echo "$1" >> "$test_file" ; }
-    pdcyml_plugins_steps_setup=( 'cmd1' 'cmd2' 'cmd3' )
+    pdcyml_plugin_setup=( 'cmd1' 'cmd2' 'cmd3' )
 
     # run
     run pdcdef_plugin_setup
@@ -329,7 +329,7 @@ teardown() {
 
     # mocks
     eval() { touch "$test_file" ; }
-    pdcyml_plugins_steps_setup=()
+    pdcyml_plugin_setup=()
 
     # run
     run pdcdef_plugin_setup

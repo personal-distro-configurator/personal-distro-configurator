@@ -63,15 +63,15 @@ function pdcdef_setup_create_variables() {
 
 # Plugin import step, from import list
 function pdcdef_plugin_import() {
-    for i in ${!pdcyml_plugins_steps_import[*]}; do
-        source "${pdcyml_plugins_steps_import[i]}"
+    for i in ${!pdcyml_plugin_import[*]}; do
+        source "${pdcyml_plugin_import[i]}"
     done
 }
 
 # Plugin setup step, from setup list
 function pdcdef_plugin_setup() {
-    for i in ${!pdcyml_plugins_steps_setup[*]}; do
-        eval "${pdcyml_plugins_steps_setup[i]}"
+    for i in ${!pdcyml_plugin_setup[*]}; do
+        eval "${pdcyml_plugin_setup[i]}"
     done
 }
 

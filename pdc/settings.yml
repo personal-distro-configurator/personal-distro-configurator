@@ -2,7 +2,7 @@ settings:
   verbose: false
   yaml:
     exclude:
-      - pdcyml_plugins_steps_execute
+      - pdcyml_plugin_execute
   file:
     log: install.log
 
@@ -35,20 +35,19 @@ yaml_files:
 import:
   -
 
-execute:
+plugins:
   -
 
-plugins:
+execute:
   -
 
 --
 plugin:
-  steps:
-    import:
-      -
-    setup:
-      -
-    confirm:
-      -
-    execute:
-      -
+  import:
+    -
+  setup:
+    -
+  confirm:
+    -
+  execute:
+    -
