@@ -29,7 +29,7 @@ path:
   plugins: ${pdcyml_path_root}/plugins/
 
 --
-yaml_files:
+yaml:
   -
 
 import:

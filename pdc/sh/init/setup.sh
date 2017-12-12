@@ -42,7 +42,7 @@ function pdcdef_setup_create_variables_user() {
 # All *.yml files can informe additionals *.yml files to be read
 # Here these files will be read and created variables
 function pdcdef_setup_create_variables_additional() {
-    for yaml_file in ${pdcyml_yaml_files[*]}; do
+    for yaml_file in ${pdcyml_yaml[*]}; do
         log_verbose "Add ${yaml_file} settings file" && log_verbose
         pdcdef_create_variables "$yaml_file"
     done

@@ -40,7 +40,7 @@ teardown() {
     i=0
 
     # mocks
-    pdcyml_yaml_files=( 'ok1' 'ok2' 'ok3' )
+    pdcyml_yaml=( 'ok1' 'ok2' 'ok3' )
     log_info() { echo ; }
     log_verbose() { [ "$i" -eq 0 ] && echo "$1" >> "$LOG_FILE" ; ((i+=1)) ; }
 
@@ -56,7 +56,7 @@ teardown() {
     tcount="${TEMP}/tcount"
 
     # mocks
-    pdcyml_yaml_files=( 'setting' 'setting' 'setting' 'setting' 'setting' )
+    pdcyml_yaml=( 'setting' 'setting' 'setting' 'setting' 'setting' )
     log_info() { echo ; }
     log_verbose() { [ "$1" = 'setting' ] && echo "$1" >> "$LOG_FILE" ; }
 
@@ -79,7 +79,7 @@ teardown() {
     verbose_file="${TEMP}/verbose_file"
 
     # mocks
-    pdcyml_yaml_files=( 'setting' 'setting' 'setting' 'setting' 'setting' )
+    pdcyml_yaml=( 'setting' 'setting' 'setting' 'setting' 'setting' )
     log_info() { touch "$log_file" ; }
     log_verbose() { touch "$verbose_file" ; }
 

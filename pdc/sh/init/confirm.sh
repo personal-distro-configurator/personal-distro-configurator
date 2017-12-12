@@ -20,11 +20,11 @@ function pdcdef_confirm_header() {
 
 # [VERBOSE] yaml files to be added
 function pdcdef_confirm_yaml() {
-    [ ! ${#pdcyml_yaml_files[@]} -eq 0 ] &&
-    log_verbose "# YAML Settings to add (${#pdcyml_yaml_files[@]}):" &&
+    [ ! ${#pdcyml_yaml[@]} -eq 0 ] &&
+    log_verbose "# YAML Settings to add (${#pdcyml_yaml[@]}):" &&
     log_verbose
 
-    for yaml_file in ${pdcyml_yaml_files[*]}; do
+    for yaml_file in ${pdcyml_yaml[*]}; do
         log_verbose "$yaml_file"
     done
 }

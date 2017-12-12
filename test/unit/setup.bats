@@ -173,7 +173,7 @@ teardown() {
     test_file="${TEMP}/test_file"
 
     # mocks
-    pdcyml_yaml_files=( 'file1.yml' 'file2.yml' 'file3.yml' )
+    pdcyml_yaml=( 'file1.yml' 'file2.yml' 'file3.yml' )
     pdcdef_create_variables() { echo "$1" >> "$test_file" ; }
 
     # run
@@ -200,7 +200,7 @@ teardown() {
     test_file="${TEMP}/test_file"
 
     # mocks
-    pdcyml_yaml_files=( )
+    pdcyml_yaml=( )
     pdcdef_create_variables() { touch "$test_file" ; }
 
     # run
