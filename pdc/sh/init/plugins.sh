@@ -41,8 +41,8 @@ function pdcdef_copy_plugin() {
 # ----
 
 function pdcdef_get_plugins() {
-    for i in ${!pdcyml_plugins_get[*]}; do
-        local plugin=${pdcyml_plugins_get[i]}
+    for i in ${!pdcyml_plugins[*]}; do
+        local plugin=${pdcyml_plugins[i]}
 
         case $plugin in
 

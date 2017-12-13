@@ -18,30 +18,13 @@ function pdcdef_confirm_header() {
     log_info
 }
 
-# Distribution informations, only what are configured
-function pdcdef_confirm_distro() {
-    [[ -n "${pdcyml_system_distro/[ ]*\n/}" ]] &&
-    log_info "# Distro   : $pdcyml_system_distro"
-
-    [[ -n "${pdcyml_system_version/[ ]*\n/}" ]] &&
-    log_info "# Version  : $pdcyml_system_version"
-
-    [[ -n "${pdcyml_system_arch/[ ]*\n/}" ]] &&
-    log_info "# Arch     : $pdcyml_system_arch"
-
-    [[ -n "${pdcyml_system_wm/[ ]*\n/}" ]] &&
-    log_info "# WM       : $pdcyml_system_wm"
-
-    log_info
-}
-
 # [VERBOSE] yaml files to be added
 function pdcdef_confirm_yaml() {
-    [ ! ${#pdcyml_yaml_files[@]} -eq 0 ] &&
-    log_verbose "# YAML Settings to add (${#pdcyml_yaml_files[@]}):" &&
+    [ ! ${#pdcyml_yaml[@]} -eq 0 ] &&
+    log_verbose "# YAML Settings to add (${#pdcyml_yaml[@]}):" &&
     log_verbose
 
-    for yaml_file in ${pdcyml_yaml_files[*]}; do
+    for yaml_file in ${pdcyml_yaml[*]}; do
         log_verbose "$yaml_file"
     done
 }
@@ -57,19 +40,19 @@ function pdcdef_confirm_executions() {
 
 # [VERBOSE] list of plugins to get
 function pdcdef_confirm_plugins() {
-    [ ! ${#pdcyml_plugins_get[@]} -eq 0 ] &&
-    log_verbose "# Plugins add (${#pdcyml_plugins_get[@]}):" &&
+    [ ! ${#pdcyml_plugins[@]} -eq 0 ] &&
+    log_verbose "# Plugins add (${#pdcyml_plugins[@]}):" &&
     log_verbose
 
-    for yaml_file in ${pdcyml_plugins_get[*]}; do
+    for yaml_file in ${pdcyml_plugins[*]}; do
         log_verbose "$yaml_file"
     done
 }
 
 # Confirm step from plugins
 function pdcdef_confirm_plugins_step() {
-    for i in ${!pdcyml_plugins_steps_confirm[*]}; do
-        eval "${pdcyml_plugins_steps_confirm[i]}"
+    for i in ${!pdcyml_plugin_confirm[*]}; do
+        eval "${pdcyml_plugin_confirm[i]}"
     done
 }
 

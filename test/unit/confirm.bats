@@ -34,86 +34,13 @@ teardown() {
     [ "$(grep 'The corresponding instalation will be done:' < "$LOG_FILE" )" ]
 }
 
-# pdcdef_confirm_distro ------------------------------------------------------
-@test "pdcdef_confirm_distro: do not log if everything is null" {
-    # mocks
-    pdcyml_system_distro=''
-    pdcyml_system_version=''
-    pdcyml_system_arch=''
-    pdcyml_system_wm=''
-
-    # run
-    pdcdef_confirm_distro
-
-    # asserts
-    [ "$(cat "$LOG_FILE")" = '' ]
-}
-
-@test "pdcdef_confirm_distro: log only one" {
-    # mocks
-    pdcyml_system_distro=''
-    pdcyml_system_version='version'
-    pdcyml_system_arch=''
-    pdcyml_system_wm=''
-
-    # run
-    pdcdef_confirm_distro
-
-    # asserts
-    [ "$(cat "$LOG_FILE")" = '# Version  : version' ]
-}
-
-@test "pdcdef_confirm_distro: log all not null" {
-    # mocks
-    pdcyml_system_distro=''
-    pdcyml_system_version='version'
-    pdcyml_system_arch=''
-    pdcyml_system_wm='wm'
-
-    # run
-    pdcdef_confirm_distro
-
-    # asserts
-    expected[0]='# Version  : version'
-    expected[1]='# WM       : wm'
-
-    i=0
-    cat "$LOG_FILE" | while read line; do
-        [ "${expected[$i]}" = "$line" ]
-        i=$((i + 1))
-    done
-}
-
-@test "pdcdef_confirm_distro: log all" {
-    # mocks
-    pdcyml_system_distro='distro'
-    pdcyml_system_version='version'
-    pdcyml_system_arch='arch'
-    pdcyml_system_wm='wm'
-
-    # run
-    pdcdef_confirm_distro
-
-    # asserts
-    expected[0]='# Distro   : distro'
-    expected[1]='# Version  : version'
-    expected[2]='# Arch     : arch'
-    expected[3]='# WM       : wm'
-
-    i=0
-    cat "$LOG_FILE" | while read line; do
-        [ "${expected[$i]}" = "$line" ]
-        i=$((i + 1))
-    done
-}
-
 # pdcdef_confirm_yaml --------------------------------------------------------
 @test "pdcdef_confirm_yaml: show number of settings to add" {
     #variables
     i=0
 
     # mocks
-    pdcyml_yaml_files=( 'ok1' 'ok2' 'ok3' )
+    pdcyml_yaml=( 'ok1' 'ok2' 'ok3' )
     log_info() { echo ; }
     log_verbose() { [ "$i" -eq 0 ] && echo "$1" >> "$LOG_FILE" ; ((i+=1)) ; }
 
@@ -129,7 +56,7 @@ teardown() {
     tcount="${TEMP}/tcount"
 
     # mocks
-    pdcyml_yaml_files=( 'setting' 'setting' 'setting' 'setting' 'setting' )
+    pdcyml_yaml=( 'setting' 'setting' 'setting' 'setting' 'setting' )
     log_info() { echo ; }
     log_verbose() { [ "$1" = 'setting' ] && echo "$1" >> "$LOG_FILE" ; }
 
@@ -152,7 +79,7 @@ teardown() {
     verbose_file="${TEMP}/verbose_file"
 
     # mocks
-    pdcyml_yaml_files=( 'setting' 'setting' 'setting' 'setting' 'setting' )
+    pdcyml_yaml=( 'setting' 'setting' 'setting' 'setting' 'setting' )
     log_info() { touch "$log_file" ; }
     log_verbose() { touch "$verbose_file" ; }
 
@@ -218,7 +145,7 @@ teardown() {
     i=0
 
     # mocks
-    pdcyml_plugins_get=( 'ok1' 'ok2' 'ok3' )
+    pdcyml_plugins=( 'ok1' 'ok2' 'ok3' )
     log_info() { echo ; }
     log_verbose() { [ "$i" -eq 0 ] && echo "$1" >> "$LOG_FILE" ; ((i+=1)) ; }
 
@@ -234,7 +161,7 @@ teardown() {
     tcount="${TEMP}/tcount"
 
     # mocks
-    pdcyml_plugins_get=( 'plugin' 'plugin' 'plugin' 'plugin' 'plugin' )
+    pdcyml_plugins=( 'plugin' 'plugin' 'plugin' 'plugin' 'plugin' )
     log_info() { echo ; }
     log_verbose() { [ "$1" = 'plugin' ] && echo "$1" >> "$LOG_FILE" ; }
 
@@ -257,7 +184,7 @@ teardown() {
     verbose_file="${TEMP}/verbose_file"
 
     # mocks
-    pdcyml_plugins_get=( 'plugin' 'plugin' 'plugin' 'plugin' 'plugin' )
+    pdcyml_plugins=( 'plugin' 'plugin' 'plugin' 'plugin' 'plugin' )
     log_info() { touch "$log_file" ; }
     log_verbose() { touch "$verbose_file" ; }
 
@@ -272,7 +199,7 @@ teardown() {
 # pdcdef_confirm_plugins_step ------------------------------------------------
 @test "pdcdef_confirm_plugins_step: do not confirm when nothing to confirm" {
     # mocks
-    pdcyml_plugins_steps_confirm=( )
+    pdcyml_plugin_confirm=( )
 
     # run
     run pdcdef_confirm_plugins_step
@@ -286,7 +213,7 @@ teardown() {
     test_file="${TEMP}/test_file"
 
     # mocks
-    pdcyml_plugins_steps_confirm=( 'touch "$test_file"' )
+    pdcyml_plugin_confirm=( 'touch "$test_file"' )
 
     # run
     pdcdef_confirm_plugins_step
@@ -302,7 +229,7 @@ teardown() {
     test_file3="${TEMP}/test_file3"
 
     # mocks
-    pdcyml_plugins_steps_confirm=( 'touch "$test_file1"' 'touch "$test_file2"' 'touch "$test_file3"' )
+    pdcyml_plugin_confirm=( 'touch "$test_file1"' 'touch "$test_file2"' 'touch "$test_file3"' )
 
     # run
     pdcdef_confirm_plugins_step

@@ -53,7 +53,7 @@ teardown() {
     url='http://git.com/user/project.git'
 
     # mocks
-    pdcyml_plugins_get=( "$url" )
+    pdcyml_plugins=( "$url" )
     pdcdef_clone_plugin() { touch "$git_file" && echo "$@" >> "$git_file"; }
 
     # run
@@ -70,7 +70,7 @@ teardown() {
     branch='develop'
 
     # mocks
-    pdcyml_plugins_get=( "${url}:${branch}" )
+    pdcyml_plugins=( "${url}:${branch}" )
     pdcdef_clone_plugin() { touch "$git_file" && echo "$@" >> "$git_file"; }
 
     # run
@@ -86,7 +86,7 @@ teardown() {
     url='https://git.com/user/project.git'
 
     # mocks
-    pdcyml_plugins_get=( "$url" )
+    pdcyml_plugins=( "$url" )
     pdcdef_clone_plugin() { touch "$git_file" && echo "$@" >> "$git_file"; }
 
     # run
@@ -103,7 +103,7 @@ teardown() {
     branch='develop'
 
     # mocks
-    pdcyml_plugins_get=( "${url}:${branch}" )
+    pdcyml_plugins=( "${url}:${branch}" )
     pdcdef_clone_plugin() { touch "$git_file" && echo "$@" >> "$git_file"; }
 
     # run
@@ -119,7 +119,7 @@ teardown() {
     github='user/project'
 
     # mocks
-    pdcyml_plugins_get=( "$github" )
+    pdcyml_plugins=( "$github" )
     pdcdef_clone_plugin() { touch "$git_file" && echo "$@" >> "$git_file"; }
 
     # run
@@ -136,7 +136,7 @@ teardown() {
     branch='master'
 
     # mocks
-    pdcyml_plugins_get=( "$github:$branch" )
+    pdcyml_plugins=( "$github:$branch" )
     pdcdef_clone_plugin() { touch "$git_file" && echo "$@" >> "$git_file"; }
 
     # run
@@ -154,7 +154,7 @@ teardown() {
     git_url_3='http://git.com/user/project:develop'
 
     # mocks
-    pdcyml_plugins_get=( "$git_url_1" "$git_url_2" "$git_url_3" )
+    pdcyml_plugins=( "$git_url_1" "$git_url_2" "$git_url_3" )
     pdcdef_clone_plugin() { touch "$git_file" && echo "$@" >> "$git_file"; }
 
     # run

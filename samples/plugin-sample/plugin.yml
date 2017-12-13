@@ -1,11 +1,10 @@
 --
-plugins:
-  steps:
-    import:
-      -
-    setup:
-      -
-    confirm:
-      -
-    execute:
-      -
+plugin:
+  import:
+    -
+  setup:
+    -
+  confirm:
+    -
+  execute:
+    -

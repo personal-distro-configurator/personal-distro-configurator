@@ -164,7 +164,7 @@ teardown() {
     plugins[4]='tarball::endpoint/to/tarbal.tar'
 
     i=0
-    for plugin in ${pdcyml_plugins_get[*]}; do
+    for plugin in ${pdcyml_plugins[*]}; do
         [ "${plugins[$i]}" = "$plugin" ]
         i=$((i + 1)) && echo "$i" > "$tcount1"
     done
