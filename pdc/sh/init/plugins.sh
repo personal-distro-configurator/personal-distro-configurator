@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # shellcheck disable=SC2154
 
 # -------------------------------------------------------------
@@ -15,7 +15,7 @@
 # @arg1: git url
 # @arg2: (optional) branch or tag to clone
 #
-function pdcdef_clone_plugin() {
+pdcdef_clone_plugin() {
     local git_project_url=$1
     local ibranch=$2
     local branch=""
@@ -28,19 +28,19 @@ function pdcdef_clone_plugin() {
 }
 
 # Download compressed plugin (tarbal, zip, rar, etc)
-function pdcdef_download_plugin() {
+pdcdef_download_plugin() {
     return # TODO
 }
 
 # Copy plugin folder from some directory
-function pdcdef_copy_plugin() {
+pdcdef_copy_plugin() {
     return # TODO
 }
 
 # Main
 # ----
 
-function pdcdef_get_plugins() {
+pdcdef_get_plugins() {
     for i in ${!pdcyml_plugins[*]}; do
         local plugin=${pdcyml_plugins[i]}
 

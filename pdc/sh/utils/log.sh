@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # shellcheck disable=SC2154
 
 # Private function to output something and log it
@@ -6,7 +6,7 @@
 #
 # @arg1: message to log
 #
-function pdcdef_log() {
+pdcdef_log() {
     local msg=$1
     echo "$msg" | tee -a "$pdcyml_path_log/$pdcyml_settings_log_file"
 }
@@ -15,7 +15,7 @@ function pdcdef_log() {
 #
 # @arg1: message to log
 #
-function log_info() {
+log_info() {
     local msg=$1
 
     # Create log folder if not exists
@@ -37,7 +37,7 @@ function log_info() {
 #
 # @arg1: message to log
 #
-function log_verbose() {
+log_verbose() {
     local msg=$1
 
     # if verbose are configured to true, log it

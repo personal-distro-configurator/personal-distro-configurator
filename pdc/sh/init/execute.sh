@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # shellcheck disable=SC2154
 
 # ----------------------------------------------------------
@@ -17,7 +17,7 @@
 #
 # @arg1: execute command
 #
-function pdcdef_execute_shell() {
+pdcdef_execute_shell() {
     local cmd=$1
     eval "$cmd"
 }
@@ -26,7 +26,7 @@ function pdcdef_execute_shell() {
 #
 # @arg1: execute command
 #
-function pdcdef_execute_sh() {
+pdcdef_execute_sh() {
     local sh_file=$1
     eval "sh $sh_file"
 }
@@ -35,7 +35,7 @@ function pdcdef_execute_sh() {
 #
 # @arg1: execute command
 #
-function pdcdef_execute_bash() {
+pdcdef_execute_bash() {
     local bash_file=$1
     eval "bash $bash_file"
 }
@@ -44,7 +44,7 @@ function pdcdef_execute_bash() {
 #
 # @arg1: execute command
 #
-function pdcdef_execute_plugin() {
+pdcdef_execute_plugin() {
     local plugin=$1
 
     local cmd
@@ -59,7 +59,7 @@ function pdcdef_execute_plugin() {
 # Main
 # ----
 
-function pdcdef_execute() {
+pdcdef_execute() {
     # Start
     log_info "Starting executions..." && log_info
 

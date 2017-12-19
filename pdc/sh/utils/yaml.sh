@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # shellcheck disable=SC2154
 
 # Credits to https://github.com/jasperes/bash-yaml/
@@ -19,7 +19,7 @@
 # person_name=John
 # person_age=30
 #
-function parse_yaml() {
+parse_yaml() {
     local yaml_file=$1
     local prefix=$2
     local s
@@ -53,7 +53,7 @@ function parse_yaml() {
 #
 # @arg1: path to yaml file
 #
-function pdcdef_create_variables() {
+pdcdef_create_variables() {
     printf "Loading settings...\n"
 
     local yaml_file="$1"
@@ -83,7 +83,7 @@ function pdcdef_create_variables() {
 # @arg1: path to yaml file
 # @arg2: list of settings to filter in yaml
 #
-function pdcdef_load_settings() {
+pdcdef_load_settings() {
     local yaml_file=$1
     local settings_to_load=$2
     local prefix='pdcyml_'
