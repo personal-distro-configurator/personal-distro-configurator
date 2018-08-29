@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
-# shellcheck disable=SC2154
 
-# Configure a lock file, to do not run another PDC process while it is running
-pdcdef_lock_file() {
+lockfile() {
     local lock="/tmp/pdc.lock"
 
     exec 200>$lock
@@ -14,3 +12,4 @@ pdcdef_lock_file() {
         exit 1
     )
 }
+

@@ -9,19 +9,19 @@ settings:
 executors:
   -
     command: shell
-    function: pdcdef_execute_shell
+    function: pdcdef_executor_shell
   -
     command: sh
-    function: pdcdef_execute_sh
+    function: pdcdef_executor_sh
   -
     command: bash
-    function: pdcdef_execute_bash
+    function: pdcdef_executor_bash
   -
     command: plugin
-    function: pdcdef_execute_plugin
+    function: pdcdef_executor_plugin
 
 path:
-  root: ../
+  root: ./
   log: ${pdcyml_path_root}/log/
   tmp: ${pdcyml_path_root}/tmp/
   resources: ${pdcyml_path_root}/resources/
@@ -41,13 +41,3 @@ plugins:
 execute:
   -
 
---
-plugin:
-  import:
-    -
-  setup:
-    -
-  confirm:
-    -
-  execute:
-    -

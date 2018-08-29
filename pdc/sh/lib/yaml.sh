@@ -1,25 +1,6 @@
 #!/usr/bin/env bash
-# shellcheck disable=SC2154
 
-# Credits to https://github.com/jasperes/bash-yaml/
-#
-# Read an yaml file and create variables with these configs
-#
-# @arg1: path to yaml file
-# @arg2: (optional) prefix for variables
-#
-# Result example, with yaml:
-#
-# person:
-#   name: John
-#   age: 30
-#
-# Will result in variables:
-#
-# person_name=John
-# person_age=30
-#
-parse_yaml() {
+pdcdef_yaml_parse() {
     local yaml_file=$1
     local prefix=$2
     local s
@@ -34,7 +15,7 @@ parse_yaml() {
         sed -ne '/^--/s|--||g; s|\"|\\\"|g; s/\s*$//g;' \
             -e "/#.*[\"\']/!s| #.*||g; /^#/s|#.*||g;" \
             -e  "s|^\($s\)\($w\)$s:$s\"\(.*\)\"$s\$|\1$fs\2$fs\3|p" \
-            -e "s|^\($s\)\($w\)$s[:-]$s\(.*\)$s\$|\1$fs\2$fs\3|p" |
+            -e "s|^\($s\)\($w\)${s}[:-]$s\(.*\)$s\$|\1$fs\2$fs\3|p" |
 
         awk -F"$fs" '{
             indent = length($1)/2;
@@ -54,22 +35,18 @@ parse_yaml() {
     ) < "$yaml_file"
 }
 
-# Read an yaml file and create variables, using parse_yaml function.
-# Variables configured to be excluded will be ignored
-#
-# @arg1: path to yaml file
-#
-pdcdef_create_variables() {
-    printf "Loading settings...\n"
-
+pdcdef_yaml_createvariables() {
     local yaml_file="$1"
 
     local variables
     local exclude
     local settings
 
-    variables="$(parse_yaml "$yaml_file" pdcyml_)"
-    exclude="$(pdcdef_load_settings "$yaml_file" 'pdcyml_settings_yaml_exclude')"
+    parseyaml=pdcdef_yaml_parse
+    loadsettings=pdcdef_yaml_loadsettings
+
+    variables="$($parseyaml "$yaml_file" pdcyml_)"
+    exclude="$($loadsettings "$yaml_file" 'pdcyml_settings_yaml_exclude')"
 
     for e in ${exclude[*]}; do
         e="${e//pdcyml_settings_yaml_exclude+=\(\"/}"
@@ -79,17 +56,9 @@ pdcdef_create_variables() {
     done
 
     eval "$variables"
-
-    printf "Settings loaded!\n"
 }
 
-# Read an yaml file and output a list of settings
-# to be created as variables
-#
-# @arg1: path to yaml file
-# @arg2: list of settings to filter in yaml
-#
-pdcdef_load_settings() {
+pdcdef_yaml_loadsettings() {
     local yaml_file=$1
     local settings_to_load=$2
     local prefix='pdcyml_'
@@ -97,7 +66,9 @@ pdcdef_load_settings() {
     local settings
     local variables
 
-    variables="$(parse_yaml "$yaml_file" "$prefix")"
+    parseyaml=pdcdef_yaml_parse
+
+    variables="$($parseyaml "$yaml_file" "$prefix")"
 
     for setting in ${settings_to_load[*]}; do
         settings+=( "$(grep -i -e "^${setting}=" -e "^${setting}+=" <<< "$variables")" )

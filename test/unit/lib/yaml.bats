@@ -1,11 +1,11 @@
 #!/usr/bin/env bats
 
-load ../helper/test_helper
+load ../../helper/test_helper
 
 setup() {
-    super_setup
+    super_setup ".."
 
-    source "${PDC_FOLDER}/sh/utils/yaml.sh"
+    source "${PDC_FOLDER}/sh/lib/yaml.sh"
 
     export YAML_SIMPLE="${RESOURCES}/yaml/simple.yml"
     export YAML_COMPLEX="${RESOURCES}/yaml/complex.yml"
@@ -16,18 +16,18 @@ teardown() {
     super_teardown
 }
 
-# parse_yaml -----------------------------------------------------------------
-@test "parse_yaml: parse a yaml file" {
+# pdcdef_yaml_parse -----------------------------------------------------------------
+@test "pdcdef_yaml_parse: parse a yaml file" {
     # run
-    output="$(parse_yaml "$YAML_SIMPLE")"
+    output="$(pdcdef_yaml_parse "$YAML_SIMPLE")"
 
     # asserts
     [ "$output" = 'simple_test=("ok")' ]
 }
 
-@test "parse_yaml: parse a complex yaml file" {
+@test "pdcdef_yaml_parse: parse a complex yaml file" {
     # run
-    output="$(parse_yaml "$YAML_COMPLEX")"
+    output="$(pdcdef_yaml_parse "$YAML_COMPLEX")"
 
     # asserts
     tcount="${TEMP}/tcount"
@@ -45,34 +45,34 @@ teardown() {
     [ "$(cat "$tcount")" = '3' ]
 }
 
-@test "parse_yaml: parse a yaml file, with prefix" {
+@test "pdcdef_yaml_parse: parse a yaml file, with prefix" {
     # run
-    output="$(parse_yaml "$YAML_SIMPLE" pdcyml_)"
+    output="$(pdcdef_yaml_parse "$YAML_SIMPLE" pdcyml_)"
 
     # asserts
     [ "$output" = 'pdcyml_simple_test=("ok")' ]
 }
 
-@test "parse_yaml: do not create variables on parse yaml" {
+@test "pdcdef_yaml_parse: do not create variables on parse yaml" {
     # run
-    output="$(parse_yaml "$YAML_SIMPLE")"
+    output="$(pdcdef_yaml_parse "$YAML_SIMPLE")"
 
     # asserts
     [ "$simple_test" = '' ]
 }
 
-# pdcdef_load_settings -------------------------------------------------------
-@test "pdcdef_load_settings: read only specified setting" {
+# pdcdef_yaml_loadsettings -------------------------------------------------------
+@test "pdcdef_yaml_loadsettings: read only specified setting" {
     # run
-    output="$(pdcdef_load_settings "$YAML_COMPLEX" "pdcyml_person_age")"
+    output="$(pdcdef_yaml_loadsettings "$YAML_COMPLEX" "pdcyml_person_age")"
 
     # asserts
     [ "$output" = 'pdcyml_person_age=("99")' ]
 }
 
-@test "pdcdef_load_settings: read only specified setting listed" {
+@test "pdcdef_yaml_loadsettings: read only specified setting listed" {
     # run
-    output="$(pdcdef_load_settings "$YAML_COMPLEX" "pdcyml_person_name pdcyml_person_age")"
+    output="$(pdcdef_yaml_loadsettings "$YAML_COMPLEX" "pdcyml_person_name pdcyml_person_age")"
 
     # asserts
     tcount="${TEMP}/tcount"
@@ -89,9 +89,9 @@ teardown() {
     [ "$(cat "$tcount")" = '2' ]
 }
 
-@test "pdcdef_load_settings: organize list based on arguments" {
+@test "pdcdef_yaml_loadsettings: organize list based on arguments" {
     # run
-    output="$(pdcdef_load_settings "$YAML_COMPLEX" "pdcyml_person_age pdcyml_person_name")"
+    output="$(pdcdef_yaml_loadsettings "$YAML_COMPLEX" "pdcyml_person_age pdcyml_person_name")"
 
     # asserts
     tcount="${TEMP}/tcount"
@@ -107,26 +107,26 @@ teardown() {
     [ "$(cat "$tcount")" = '2' ]
 }
 
-@test "pdcdef_load_settings: do not create variables on read yaml" {
+@test "pdcdef_yaml_loadsettings: do not create variables on read yaml" {
     # run
-    output="$(pdcdef_load_settings "$YAML_COMPLEX" "pdcyml_person_age")"
+    output="$(pdcdef_yaml_loadsettings "$YAML_COMPLEX" "pdcyml_person_age")"
 
     # asserts
     [ "$pdcyml_person_age" = '' ]
 }
 
-# pdcdef_create_variables ----------------------------------------------------
-@test "pdcdef_create_variables: must create variable" {
+# pdcdef_yaml_createvariables ----------------------------------------------------
+@test "pdcdef_yaml_createvariables: must create variable" {
     # run
-    pdcdef_create_variables "$YAML_SIMPLE"
+    pdcdef_yaml_createvariables "$YAML_SIMPLE"
 
     # asserts
     [ "$pdcyml_simple_test" = "ok" ]
 }
 
-@test "pdcdef_create_variables: must create all variables" {
+@test "pdcdef_yaml_createvariables: must create all variables" {
     # run
-    pdcdef_create_variables "$YAML_COMPLEX"
+    pdcdef_yaml_createvariables "$YAML_COMPLEX"
 
     # asserts
     [ "$pdcyml_person_name" = "Snow" ]
@@ -134,9 +134,9 @@ teardown() {
     [ "$pdcyml_person_from" = "Tokyo" ]
 }
 
-@test "pdcdef_create_variables: ignore variables configured to exclude" {
+@test "pdcdef_yaml_createvariables: ignore variables configured to exclude" {
     # run
-    pdcdef_create_variables "$YAML_PDC"
+    pdcdef_yaml_createvariables "$YAML_PDC"
 
     # asserts
     [ "$pdcyml_ignore_me" = '' ]
@@ -145,9 +145,9 @@ teardown() {
     [ "$pdcyml_system_wm" = "\"i3\"" ] # validate that variables are created
 }
 
-@test "pdcdef_create_variables: create all variables from a 'pdc.yml' file" {
+@test "pdcdef_yaml_createvariables: create all variables from a 'pdc.yml' file" {
     # run
-    pdcdef_create_variables "$YAML_PDC"
+    pdcdef_yaml_createvariables "$YAML_PDC"
 
     # asserts
     [ "$pdcyml_system_distro" = "\"archlinux\"" ]

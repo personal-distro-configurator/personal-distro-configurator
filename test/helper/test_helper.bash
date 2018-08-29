@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 
 super_setup() {
-    export PDC_FOLDER="${BATS_TEST_DIRNAME}/../../pdc"
-    export RESOURCES="${BATS_TEST_DIRNAME}/../resources"
-    export TEMP="${BATS_TEST_DIRNAME}/../tmp"
+    local dir="$1"
+
+    export PDC_FOLDER="${BATS_TEST_DIRNAME}/${dir}/../../pdc"
+    export RESOURCES="${BATS_TEST_DIRNAME}/${dir}/../resources"
+    export TEMP="${BATS_TEST_DIRNAME}/${dir}/../tmp"
 
     [ ! -d "$TEMP" ] && mkdir "$TEMP"
 }
