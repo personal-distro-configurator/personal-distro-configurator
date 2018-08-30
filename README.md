@@ -1,4 +1,4 @@
-> ALERT: We are in alpha, nothing are realy tested or configured as the final released can be.
+> ALERT: Project under development and is not stable for use
 
 [![Build status][travis-image]][travis-url]
 
@@ -7,48 +7,25 @@
 
 # Personal Distro Configurator
 
-Personal Distro Configurator (PDC) is a framework to install and configure everything you want on your distro. With it, you can transform a fresh linux install into your personal distro!
+Personal Distro Configurator (PDC) is a framework to run scripts based on a yaml file. The propose is simple and the motivations was many.
 
-## Getting Started
+The idea here is configure what you need on a yaml file, running scripts based on this configuration. To help, plugins that do some job can be done, needing to configure what or how the plugin must execute on a simple yaml.
 
-To create your own configurator, you must create a `pdc.yml` file. This file contains informations about what and how PDC must configure your distro.
+Another way to use maybe is just get your own scripts and execute it the way you want. There is no limit to how to use it.
 
-Some samples on how it will be on `samples` folder. In future, a way to run will be done.
+Any language can be used (Bash, Python, Perl, Ruby, Java...) !
 
-### Requirements
+## Project under development
 
-**All you need is a linux system!**
+Current this project is not stable for use. Future, more informations will be done about how to use, create plugins, documentations, contribute, etc.
 
-We don't want to install or configure something that can be unhappy to do.
+## Changelog
 
-Currently, it's 100% bash script. But can needed python in future, what normally your distro got.
-
-## Documentation
-
-As this project are not done yet, we haven't created a documentation.
-
-In future, we will create something that will help you to create a good PDC file
-to configure your distro.
-
-## Getting Involved
-
-For now, not so much can be done to help. We are looking for the best
-way to create a good framework to configure your distro.
-
-**BUT** if you wanna help us, create an issue with a good idea, what you think can be done or something else.
-We will be happy with it!
-
-### Contributing
-
-We will create a `CONTRIBUTING.md` file, explaining how to help this project.
-
-### Plugins
-
-We have a plugin system. In `CONTRIBUTING.md` file we will explain how to create.
+See on [CHANGELOG](docs/CHANGELOG.md) file.
 
 ## Authors
 
-Look at [AUTHORS](AUTHORS). This file is generated automatically.
+See on [AUTHORS](docs/AUTHORS) file.
 
 ## License
 

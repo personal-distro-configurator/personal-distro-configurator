@@ -1,4 +1,5 @@
 *Auto-generated file from hack/release/changelog.sh*
+
 ## 0.0.5 (2017-11-26)
 
 - Continuous integration updated 

@@ -1,33 +1,15 @@
 # Hack
 
-A collection of scripts to test, build, release, etc. Every step are organized in separated folders, managed by `make.sh` script.
+A collection of scripts to help on continuous integration. Every step are organized in separated folders, managed by `npm` scripts.
 
-## Usage
+## Folders
 
-Use `make.sh` file as your main script, avoid use others scripts direct.
-
-For help, use:
-
-    make.sh help
-
-### Test
-
-Run tests with:
-
-    make.sh test [OPTIONS]
-
-Currently options avaliable:
-
-- --syntax: Shellcheck and Editorconfig syntax validate.
-- --unit: Unit tests, running with bats.
-- --all: All tests.
+To help what each folder is, here are some explains.
 
 ### Release
 
-For a release version, call:
+Scripts to update project for a release version, updating authors and changelog.
 
-    make.sh release --version x.x.x
+### Changelogs
 
-* `VERSION` file will be updated with new version, informed as argument
-* `CHANGELOGS` will be updated, using files found in `changelog` folder
-* `AUTHORS` will be updated, based on git commits
+Every update on this project must be documented on a `CHANGELOG` file. This changelog is auto-generated based on files on this folder.
