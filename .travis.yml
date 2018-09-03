@@ -1,29 +1,15 @@
-language:
-  - bash
-  - node_js
+stages:
+  - test
 
-os: linux
-node_js: 8
-
-addons:
-  apt:
-    sources:
-      - debian-sid
-    packages:
-      - shellcheck
-      - bats
-
-before_install:
-  - if [[ `npm -v` != 5* ]]; then npm i -g npm@5; fi
-
-install:
-  - npm install --only=dev
-
-before_script:
-  - chmod +x ./hack/make.sh
-
-script:
-  - ./hack/make.sh test --syntax --unit
+jobs:
+  include:
+    - stage: test
+      language: node_js
+      os: linux
+      node_js: 8
+      before_install: if [[ `npm -v` != 5* ]]; then npm i -g npm@5; fi
+      install: npm install --only=dev
+      script: npm test
 
 notifications:
   email:

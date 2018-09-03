@@ -1,54 +1,43 @@
 settings:
   verbose: false
-  path:
-    install: ../
-    log: ${pdcyml_settings_path_install}/log/
-    tmp: ${pdcyml_settings_path_install}/tmp/
-    resources: ${pdcyml_settings_path_install}/resources
-    scripts: ${pdcyml_settings_path_install}/scripts
-    plugins: ${pdcyml_settings_path_install}/plugins
+  yaml:
+    exclude:
+      - pdcyml_plugin_execute
   file:
     log: install.log
-  executors:
-    -
-      command: shell
-      function: pdcdef_execute_shell
-    -
-      command: sh
-      function: pdcdef_execute_sh
-    -
-      command: bash
-      function: pdcdef_execute_bash
-    -
-      command: plugin
-      function: pdcdef_execute_plugin
-  exclude:
-    - plugins_steps_execute
 
-system:
-  distro:
-  version:
-  arch:
-  wm:
+executors:
+  -
+    command: shell
+    function: pdcdef_executor_shell
+  -
+    command: sh
+    function: pdcdef_executor_sh
+  -
+    command: bash
+    function: pdcdef_executor_bash
+  -
+    command: plugin
+    function: pdcdef_executor_plugin
 
-yaml_files:
+path:
+  root: ./
+  log: ${pdcyml_path_root}/log/
+  tmp: ${pdcyml_path_root}/tmp/
+  resources: ${pdcyml_path_root}/resources/
+  scripts: ${pdcyml_path_root}/scripts/
+  plugins: ${pdcyml_path_root}/plugins/
+
+--
+yaml:
   -
 
 import:
   -
 
+plugins:
+  -
+
 execute:
   -
 
-plugins:
-  get:
-    -
-  steps:
-    import:
-      -
-    setup:
-      -
-    confirm:
-      -
-    execute:
-      -
