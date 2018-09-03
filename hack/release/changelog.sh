@@ -3,11 +3,12 @@
 set -e
 cd "$(dirname "$(readlink -f "$0")")"/../../
 
-source pdc/sh/utils/yaml.sh
+source pdc/sh/lib/yaml.sh
 
-VERSION=$(cat VERSION)
+VERSION=$(cat package.json | grep '"version": "' | awk '{print $2}' | sed 's/"npm.*//g' | cut -d '"' -f2)
 TODAY=$(date +%Y-%m-%d)
-FILE='CHANGELOG.md'
+FILE='docs/CHANGELOG.md'
+NEW_CHANGELOGS="hack/changelogs"
 OLD_CHANGELOG=$(sed '/^*Auto-generated/ d' < "$FILE")
 LINK_PULL_REQUESTS='https://github.com/personal-distro-configurator/personal-distro-configurator/pull/'
 
@@ -26,7 +27,7 @@ elif [ ! -f "$FILE" ]; then
 
 # Must exist changes on changelogs folder
 # It do not stop script, only show a warning asking if it is ok
-elif [ -z "$(ls changelogs/ 2>/dev/null)" ]; then
+elif [ -z "$(ls "${NEW_CHANGELOGS}"/ 2>/dev/null)" ]; then
     echo -n 'changelogs are empty, is it correctly? [y/N]'
     read -r yesno
 
@@ -44,11 +45,12 @@ fi
 
 # Start write to CHANGELOG
 echo '*Auto-generated file from hack/release/changelog.sh*' > "$FILE"
+echo '' >> "$FILE"
 echo "## ${VERSION} (${TODAY})" >> "$FILE"
 echo "" >> "$FILE"
 
 # Write every changelog on changelogs folder
-for entry in changelogs/*; do
+for entry in "${NEW_CHANGELOGS}"/*.yml; do
 
     # declare variables
     declare title=''
@@ -67,12 +69,11 @@ for entry in changelogs/*; do
 done
 
 # Write old content
-echo "" >> "$FILE"
 echo "$OLD_CHANGELOG" >> "$FILE"
 
 echo 'CHANGELOG file updated with success!'
 
 echo 'Cleaning old changelogs...'
 # Clean changelogs writed to CHANGELOG file
-rm changelogs/*
+rm "${NEW_CHANGELOGS}"/*
 echo 'Clean ok!'

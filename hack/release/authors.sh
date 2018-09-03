@@ -3,7 +3,7 @@
 set -e
 cd "$(dirname "$(readlink -f "$0")")"/../../
 
-FILE='AUTHORS'
+FILE='docs/AUTHORS'
 
 echo 'Updating AUTHORS file...'
 
