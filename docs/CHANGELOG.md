@@ -1,5 +1,14 @@
 *Auto-generated file from hack/release/changelog.sh*
 
+## 0.0.6 (2018-09-03)
+
+- Fix settings to be ignored (exclude) [#55](https://github.com/personal-distro-configurator/personal-distro-configurator/pull/55)
+- Many updates on settings file, making it better readable [#58](https://github.com/personal-distro-configurator/personal-distro-configurator/pull/58)
+- Update workflow and Project CI structure [#61](https://github.com/personal-distro-configurator/personal-distro-configurator/pull/61)
+- Update yaml file, moving executors outside from settings propertie [#56](https://github.com/personal-distro-configurator/personal-distro-configurator/pull/56)
+- Update yaml file, moving path outside from settings propertie [#56](https://github.com/personal-distro-configurator/personal-distro-configurator/pull/56)
+- Update yaml parser script [#60](https://github.com/personal-distro-configurator/personal-distro-configurator/pull/60)
+
 ## 0.0.5 (2017-11-26)
 
 - Continuous integration updated 
