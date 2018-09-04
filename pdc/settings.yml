@@ -1,3 +1,4 @@
+-- pdc
 settings:
   verbose: false
   yaml:
@@ -21,17 +22,14 @@ executors:
     function: pdcdef_executor_plugin
 
 path:
-  root: ./
+  root: ${PDCCONST_RUNNING_DIR}
   log: ${pdcyml_path_root}/log/
   tmp: ${pdcyml_path_root}/tmp/
   resources: ${pdcyml_path_root}/resources/
   scripts: ${pdcyml_path_root}/scripts/
   plugins: ${pdcyml_path_root}/plugins/
 
---
-yaml:
-  -
-
+-- user
 import:
   -
 
@@ -41,3 +39,9 @@ plugins:
 execute:
   -
 
+-- plugin
+plugin:
+  setup:
+    -
+  execute:
+    -

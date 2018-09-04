@@ -8,4 +8,3 @@ setup
 unset -f _step_setup_plugin setup
 
 . ./sh/steps/_execute.sh
-

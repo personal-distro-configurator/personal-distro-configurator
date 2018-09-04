@@ -12,4 +12,3 @@ lockfile() {
         exit 1
     )
 }
-
