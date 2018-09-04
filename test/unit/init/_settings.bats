@@ -17,7 +17,7 @@ teardown() {
     test_file="${TEMP}/test_file"
 
     # mocks
-    pdcyml_path_plugins="${RESOURCES}/setup/plugins/one"
+    pdcyml_path_plugins="${RESOURCES}/init/_settings/plugins/one"
     pdcdef_yaml_createvariables() { echo "$1" > "$test_file" ; }
 
     # run
@@ -33,7 +33,7 @@ teardown() {
     test_file="${TEMP}/test_file"
 
     # mocks
-    pdcyml_path_plugins="${RESOURCES}/setup/plugins/zero"
+    pdcyml_path_plugins="${RESOURCES}/init/_settings/plugins/zero"
     pdcdef_yaml_createvariables() { echo "$1" > "$test_file" ; }
 
     # run
@@ -49,7 +49,7 @@ teardown() {
     test_file="${TEMP}/test_file"
 
     # mocks
-    pdcyml_path_plugins="${RESOURCES}/setup/plugins/none"
+    pdcyml_path_plugins="${RESOURCES}/init/_settings/plugins/none"
     pdcdef_yaml_createvariables() { echo "$1" > "$test_file" ; }
 
     # run
@@ -65,7 +65,7 @@ teardown() {
     test_file="${TEMP}/test_file"
 
     # mocks
-    pdcyml_path_plugins="${RESOURCES}/setup/plugins/many"
+    pdcyml_path_plugins="${RESOURCES}/init/_settings/plugins/many"
     pdcdef_yaml_createvariables() { echo "$1" >> "$test_file" ; }
 
     # run
@@ -92,7 +92,7 @@ teardown() {
     test_file="${TEMP}/test_file"
 
     # mocks
-    pdcyml_path_plugins="${RESOURCES}/setup/plugins/some"
+    pdcyml_path_plugins="${RESOURCES}/init/_settings/plugins/some"
     pdcdef_yaml_createvariables() { echo "$1" >> "$test_file" ; }
 
     # run
@@ -120,7 +120,7 @@ teardown() {
     test_file="${TEMP}/test_file"
 
     # mocks
-    pdcyml_path_root="${RESOURCES}/setup"
+    pdcyml_path_root="${RESOURCES}/init/_settings"
     pdcdef_yaml_createvariables() { echo "$1" > "$test_file" ; }
 
     # run
@@ -146,4 +146,26 @@ teardown() {
     # asserts
     [ "$status" -eq 1 ]
     [ ! -f "$test_file" ]
+}
+
+# read_settings --------------------------------------------------------------
+@test "read_settings: validate execution order" {
+    # variables
+    test_file="${TEMP}/test_file"
+
+    # mocks
+    _step_settings_plugins() { echo "1" >> "$test_file" ; }
+    _step_settings_user() { echo "2" >> "$test_file" ; }
+
+    # run
+    run read_settings
+
+    # asserts
+    [ "$status" -eq 0 ]
+    [ -f "$test_file" ]
+
+    count=0
+    while read line; do
+        [ "$line" == $((count+=1)) ]
+    done < "$test_file"
 }

@@ -58,7 +58,7 @@ teardown() {
 # _user_import -------------------------------------------------------------
 @test "_user_import: must import one file" {
     # variables
-    file1="${RESOURCES}/setup/sh/file1.sh"
+    file1="${RESOURCES}/init/_import/sh/file1.sh"
 
     # mocks
     pdcyml_import=( "$file1" )
@@ -73,9 +73,9 @@ teardown() {
 
 @test "_user_import: must import many files" {
     # variables
-    file1="${RESOURCES}/setup/sh/file1.sh"
-    file2="${RESOURCES}/setup/sh/file2.sh"
-    file3="${RESOURCES}/setup/sh/file3.sh"
+    file1="${RESOURCES}/init/_import/sh/file1.sh"
+    file2="${RESOURCES}/init/_import/sh/file2.sh"
+    file3="${RESOURCES}/init/_import/sh/file3.sh"
 
     # mocks
     pdcyml_import=( "$file1" "$file2" "$file3" )
@@ -99,4 +99,26 @@ teardown() {
 
     # asserts
     [ "$status" -eq 0 ]
+}
+
+# import_shell_files ---------------------------------------------------------
+@test "import_shell_files: validate execution order" {
+    # variables
+    test_file="${TEMP}/test_file"
+
+    # mocks
+    _plugin_import() { echo "1" >> "$test_file" ; }
+    _user_import() { echo "2" >> "$test_file" ; }
+
+    # run
+    run import_shell_files
+
+    # asserts
+    [ "$status" -eq 0 ]
+    [ -f "$test_file" ]
+
+    count=0
+    while read line; do
+        [ "$line" == $((count+=1)) ]
+    done < "$test_file"
 }

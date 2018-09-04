@@ -10,10 +10,8 @@ teardown() {
     super_teardown
 }
 
-# execute -------------------------------------------------------------
-@test "execute: test function and command" {
-    # variables
-
+# execute.sh -----------------------------------------------------------------
+@test "execute.sh: test function and command" {
     # mocks
     pdcyml_execute=( "shell touch "${TEMP}/shell"" )
     pdcyml_executors__command[0]="shell"
@@ -28,7 +26,7 @@ teardown() {
     [ -f "${TEMP}/shell" ]
 }
 
-@test "execute: test many functions and commands" {
+@test "execute.sh: test many functions and commands" {
     # variables
     command_test_file="${TEMP}/command"
 

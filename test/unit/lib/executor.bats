@@ -20,7 +20,7 @@ teardown() {
 
 # pdcdef_executor_sh ----------------------------------------------------------
 @test "pdcdef_executor_sh: must execute sh file" {
-    TEMP_FILE="${RESOURCES}/execute/sh.sh"
+    TEMP_FILE="${RESOURCES}/lib/executor/sh.sh"
     touch "$TEMP_FILE"
 
     RESULT=$(pdcdef_executor_sh "$TEMP_FILE")
@@ -30,7 +30,7 @@ teardown() {
 
 # pdcdef_executor_bash ----------------------------------------------------------
 @test "pdcdef_executor_bash: must execute bash file" {
-    TEMP_FILE="${RESOURCES}/execute/bash.sh"
+    TEMP_FILE="${RESOURCES}/lib/executor/bash.sh"
     touch "$TEMP_FILE"
 
     RESULT=$(pdcdef_executor_bash "$TEMP_FILE")
@@ -68,7 +68,7 @@ teardown() {
     plugin="plugin"
 
     # mocks
-    pdcyml_path_plugins="${RESOURCES}/execute"
+    pdcyml_path_plugins="${RESOURCES}/lib/executor"
     expected_plugin_path="${pdcyml_path_plugins}/pdc-${plugin}-plugin/plugin.yml"
 
     source "${PDC_FOLDER}/sh/lib/yaml.sh"
