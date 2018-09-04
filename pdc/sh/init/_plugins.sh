@@ -58,6 +58,7 @@ get_plugins() {
 
             # GitHub Plugin Clone
             *)
+                [[ "$plugin" != "" ]] || continue
                 _clone_plugin "https://github.com/$(cut -d ':' -f1 <<< "$plugin").git" "$([ -z "${plugin##*:*}" ] && cut -d ':' -f2 <<< "$plugin")"
             ;;
         esac

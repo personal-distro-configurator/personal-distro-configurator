@@ -19,16 +19,7 @@ _step_settings_user() {
     pdcdef_yaml_createvariables "${pdcyml_path_root}/pdc.yml"
 }
 
-_step_settings_additional() {
-    for yaml_file in ${pdcyml_yaml[*]}; do
-        pdcdef_yaml_createvariables "$yaml_file"
-    done
-
-    return 0
-}
-
 read_settings() {
     _step_settings_plugins
     _step_settings_user
-    _step_settings_additional
 }
