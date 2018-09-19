@@ -7,9 +7,9 @@ setup() {
 
     source "${PDC_FOLDER}/sh/lib/yaml.sh"
 
-    export YAML_SIMPLE="${RESOURCES}/yaml/simple.yml"
-    export YAML_COMPLEX="${RESOURCES}/yaml/complex.yml"
-    export YAML_PDC="${RESOURCES}/yaml/pdc.yml"
+    export YAML_SIMPLE="${RESOURCES}/lib/yaml/simple.yml"
+    export YAML_COMPLEX="${RESOURCES}/lib/yaml/complex.yml"
+    export YAML_PDC="${RESOURCES}/lib/yaml/pdc.yml"
 }
 
 teardown() {

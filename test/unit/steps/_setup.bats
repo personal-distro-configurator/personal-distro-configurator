@@ -54,3 +54,20 @@ teardown() {
     [ "$status" -eq 0 ]
     [ ! -f "$test_file" ]
 }
+
+# setup ----------------------------------------------------------------------
+@test "setup: validate execution order" {
+    # variables
+    test_file="${TEMP}/test_file"
+
+    # mocks
+    _step_setup_plugin() { echo "1" >> "$test_file" ; }
+
+    # run
+    run setup
+
+    # asserts
+    [ "$status" -eq 0 ]
+    [ -f "$test_file" ]
+    [ "$(cat "$test_file" | cut -d$'\n' -f1)" == '1' ]
+}

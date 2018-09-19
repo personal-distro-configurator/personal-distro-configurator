@@ -15,7 +15,7 @@ source ./sh/lib/executor.sh
 source ./sh/lib/log.sh
 source ./sh/lib/yaml.sh
 
-. ./sh/init/init.sh
-. ./sh/steps/steps.sh
+source ./sh/init/init.sh
+source ./sh/steps/steps.sh
 
 exit 0
