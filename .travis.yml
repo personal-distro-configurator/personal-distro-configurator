@@ -1,16 +1,26 @@
-stages:
-  - test
+language: node_js
+os: linux
+node_js: 8
 
 jobs:
   include:
-    - stage: test
-      language: node_js
-      os: linux
-      node_js: 8
-      before_install: if [[ `npm -v` != 5* ]]; then npm i -g npm@5; fi
-      install: npm install --only=dev
-      script: npm test
+
+  - stage: test
+    install: npm install --only=dev
+    script: npm test
+
+  - stage: deploy
+    if: branch = master
+    deploy:
+      provider: npm
+      email: "$NPM_EMAIL"
+      api_key: "$NPM_TOKEN"
+      skip_cleanup: true
+      on:
+        branch: master
+        repo: personal-distro-configurator/personal-distro-configurator
 
 notifications:
   email:
     on_success: never
+
