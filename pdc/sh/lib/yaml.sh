@@ -43,10 +43,10 @@ pdcdef_yaml_createvariables() {
     local settings
 
     parseyaml=pdcdef_yaml_parse
-    loadsettings=pdcdef_yaml_loadsettings
+    readsettings=pdcdef_yaml_readsettings
 
     variables="$($parseyaml "$yaml_file" pdcyml_)"
-    exclude="$($loadsettings "$yaml_file" 'pdcyml_settings_yaml_exclude')"
+    exclude="$($readsettings "$yaml_file" 'pdcyml_settings_yaml_exclude')"
 
     for e in ${exclude[*]}; do
         e="${e//pdcyml_settings_yaml_exclude+=\(\"/}"
@@ -58,7 +58,7 @@ pdcdef_yaml_createvariables() {
     eval "$variables"
 }
 
-pdcdef_yaml_loadsettings() {
+pdcdef_yaml_readsettings() {
     local yaml_file=$1
     local settings_to_load=$2
     local prefix='pdcyml_'
@@ -75,4 +75,11 @@ pdcdef_yaml_loadsettings() {
     done
 
     sed 's/ $//' <<< "${settings[@]}"
+}
+
+pdcdef_yaml_loadsettings() {
+    local file=$1
+    local setting=$2
+
+    eval "$(pdcdef_yaml_readsettings "$file" "$setting")"
 }

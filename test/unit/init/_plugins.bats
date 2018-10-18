@@ -54,7 +54,7 @@ teardown() {
     url='http://git.com/user/project.git'
 
     # mocks
-    pdcdef_yaml_loadsettings() { echo "$url"; }
+    pdcdef_yaml_loadsettings() { eval "pdcyml_plugins+=($url)"; }
     _clone_plugin() { touch "$git_file" && echo "$@" >> "$git_file"; }
 
     # run
@@ -71,7 +71,7 @@ teardown() {
     branch='develop'
 
     # mocks
-    pdcdef_yaml_loadsettings() { echo "${url}:${branch}"; }
+    pdcdef_yaml_loadsettings() { eval "pdcyml_plugins+=(${url}:${branch})"; }
     _clone_plugin() { touch "$git_file" && echo "$@" >> "$git_file"; }
 
     # run
@@ -87,7 +87,7 @@ teardown() {
     url='https://git.com/user/project.git'
 
     # mocks
-    pdcdef_yaml_loadsettings() { echo "$url"; }
+    pdcdef_yaml_loadsettings() { eval "pdcyml_plugins+=($url)"; }
     _clone_plugin() { touch "$git_file" && echo "$@" >> "$git_file"; }
 
     # run
@@ -104,7 +104,7 @@ teardown() {
     branch='develop'
 
     # mocks
-    pdcdef_yaml_loadsettings() { echo "${url}:${branch}"; }
+    pdcdef_yaml_loadsettings() { eval "pdcyml_plugins+=(${url}:${branch})"; }
     _clone_plugin() { touch "$git_file" && echo "$@" >> "$git_file"; }
 
     # run
@@ -120,7 +120,7 @@ teardown() {
     github='user/project'
 
     # mocks
-    pdcdef_yaml_loadsettings() { echo "$github"; }
+    pdcdef_yaml_loadsettings() { eval "pdcyml_plugins+=($github)"; }
     _clone_plugin() { touch "$git_file" && echo "$@" >> "$git_file"; }
 
     # run
@@ -137,7 +137,7 @@ teardown() {
     branch='master'
 
     # mocks
-    pdcdef_yaml_loadsettings() { echo "$github:$branch"; }
+    pdcdef_yaml_loadsettings() { eval "pdcyml_plugins+=($github:$branch)"; }
     _clone_plugin() { touch "$git_file" && echo "$@" >> "$git_file"; }
 
     # run
@@ -155,7 +155,7 @@ teardown() {
     git_url_3='http://git.com/user/project:develop'
 
     # mocks
-    pdcdef_yaml_loadsettings() { echo "$git_url_1" "$git_url_2" "$git_url_3"; }
+    #pdcdef_yaml_loadsettings() { echo "$git_url_1" "$git_url_2" "$git_url_3"; }
     _clone_plugin() { touch "$git_file" && echo "$@" >> "$git_file"; }
 
     # run
@@ -168,9 +168,10 @@ teardown() {
 
     i=0
     while read line; do
+        echo "hue" >> hue
         [ "${git_command[$i]}" = "$line" ]
         i=$((i + 1))
-    done < "$(cat "$git_file")"
+    done < "$git_file"
 
     [ "$status" -eq 0 ]
 }

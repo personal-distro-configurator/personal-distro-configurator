@@ -3,8 +3,8 @@
 # shellcheck disable=SC1090
 
 _plugin_import() {
-    for i in ${!pdcyml_plugin_import[*]}; do
-        source "${pdcyml_plugin_import[i]}"
+    for file in "${pdcyml_plugin_import[@]}"; do
+        source "$file"
     done
 }
 

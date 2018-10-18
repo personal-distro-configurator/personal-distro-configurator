@@ -4,6 +4,8 @@ load ../../helper/test_helper
 
 setup() {
     super_setup ".."
+    source "${PDC_FOLDER}/sh/steps/_execute.sh"
+
 }
 
 teardown() {
@@ -20,7 +22,7 @@ teardown() {
     log_info() { echo ; }
 
     # run
-    . "${PDC_FOLDER}/sh/steps/_execute.sh"
+    execute
 
     # asserts
     [ -f "${TEMP}/shell" ]
@@ -50,7 +52,7 @@ teardown() {
     log_info() { echo ; }
 
     # run
-    . "${PDC_FOLDER}/sh/steps/_execute.sh"
+    execute
 
     # asserts
     [ -f "${TEMP}/shell" ]

@@ -39,37 +39,12 @@ teardown() {
 }
 
 # pdcdef_executor_plugin ------------------------------------------------------
-@test "pdcdef_executor_plugin: test values to execute" {
-    # variables
-    plugin="plugin"
-    plugin_file="${TEMP}/plugin_result"
-    plugin_command="(\"touch $plugin_file\")"
-
-    # mocks
-    pdcyml_path_plugins="${TEMP}"
-    expected_plugin_path="${pdcyml_path_plugins}/pdc-${plugin}-plugin/plugin.yml"
-
-    pdcdef_yaml_loadsettings() {
-        [ "$1" = "$expected_plugin_path" ] &&
-        [ "$2" = 'pdcyml_plugin_execute' ] &&
-        settings="pdcyml_ok="$plugin_command"" &&
-        echo "${settings[@]}" ;
-    }
-
-    # run
-    pdcdef_executor_plugin "$plugin"
-
-    # asserts
-    [ -f "$plugin_file" ]
-}
-
 @test "pdcdef_executor_plugin: must execute many" {
     # variables
-    plugin="plugin"
+    plugin="pdc-plugin-plugin"
 
     # mocks
     pdcyml_path_plugins="${RESOURCES}/lib/executor"
-    expected_plugin_path="${pdcyml_path_plugins}/pdc-${plugin}-plugin/plugin.yml"
 
     source "${PDC_FOLDER}/sh/lib/yaml.sh"
 

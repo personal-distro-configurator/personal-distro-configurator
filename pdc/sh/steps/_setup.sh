@@ -2,8 +2,8 @@
 # shellcheck disable=SC2154
 
 _step_setup_plugin() {
-    for i in ${!pdcyml_plugin_setup[*]}; do
-        eval "${pdcyml_plugin_setup[i]}"
+    for plugin_setup in "${pdcyml_plugin_setup[@]}"; do
+        eval "$plugin_setup"
     done
 }
 

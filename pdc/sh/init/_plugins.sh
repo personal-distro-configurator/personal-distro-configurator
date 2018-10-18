@@ -6,11 +6,14 @@ _clone_plugin() {
     local ibranch=$2
     local branch=""
     local gitclone=""
+    local plugin
 
-    branch=$([[ -n "${ibranch/[ ]*\n/}" ]] && echo "--branch $ibranch")
+    plugin=$(sed -e 's|.*/||g;s|.git||g' <<< "$git_project_url")
+    branch=$([[ -n "${ibranch/[ ]*\n/}" ]] && echo "--branch $ibranch" || echo "")
     gitclone="git clone ${git_project_url} ${branch} --depth 1"
 
-    cd "$pdcyml_path_plugins" && $gitclone; cd - || exit 1;
+    [ -d "${pdcyml_path_plugins}/${plugin}" ] && return;
+    (cd "$pdcyml_path_plugins" && $gitclone && echo)
 }
 
 # Download compressed plugin (tarbal, zip, rar, etc)
@@ -24,10 +27,11 @@ _copy_plugin() {
 }
 
 get_plugins() {
-    pdcyml_plugins="$(pdcdef_yaml_loadsettings "${pdcyml_path_root}/pdc.yml" plugins)"
+    local pdcyml_plugins
 
-    for i in ${!pdcyml_plugins[*]}; do
-        local plugin=${pdcyml_plugins[i]}
+    pdcdef_yaml_loadsettings "${pdcyml_path_root}/pdc.yml" pdcyml_plugins
+
+    for plugin in "${pdcyml_plugins[@]}"; do
 
         case $plugin in
 

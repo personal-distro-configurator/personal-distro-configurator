@@ -16,4 +16,5 @@ create_variables() {
 create_paths() {
     _create_if_not_exists "$pdcyml_path_root"
     _create_if_not_exists "$pdcyml_path_log"
+    _create_if_not_exists "$pdcyml_path_plugins"
 }
