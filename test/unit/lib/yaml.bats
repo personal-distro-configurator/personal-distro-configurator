@@ -61,18 +61,18 @@ teardown() {
     [ "$simple_test" = '' ]
 }
 
-# pdcdef_yaml_loadsettings -------------------------------------------------------
-@test "pdcdef_yaml_loadsettings: read only specified setting" {
+# pdcdef_yaml_readsettings -------------------------------------------------------
+@test "pdcdef_yaml_readsettings: read only specified setting" {
     # run
-    output="$(pdcdef_yaml_loadsettings "$YAML_COMPLEX" "pdcyml_person_age")"
+    output="$(pdcdef_yaml_readsettings "$YAML_COMPLEX" "pdcyml_person_age")"
 
     # asserts
     [ "$output" = 'pdcyml_person_age=("99")' ]
 }
 
-@test "pdcdef_yaml_loadsettings: read only specified setting listed" {
+@test "pdcdef_yaml_readsettings: read only specified setting listed" {
     # run
-    output="$(pdcdef_yaml_loadsettings "$YAML_COMPLEX" "pdcyml_person_name pdcyml_person_age")"
+    output="$(pdcdef_yaml_readsettings "$YAML_COMPLEX" "pdcyml_person_name pdcyml_person_age")"
 
     # asserts
     tcount="${TEMP}/tcount"
@@ -89,9 +89,9 @@ teardown() {
     [ "$(cat "$tcount")" = '2' ]
 }
 
-@test "pdcdef_yaml_loadsettings: organize list based on arguments" {
+@test "pdcdef_yaml_readsettings: organize list based on arguments" {
     # run
-    output="$(pdcdef_yaml_loadsettings "$YAML_COMPLEX" "pdcyml_person_age pdcyml_person_name")"
+    output="$(pdcdef_yaml_readsettings "$YAML_COMPLEX" "pdcyml_person_age pdcyml_person_name")"
 
     # asserts
     tcount="${TEMP}/tcount"
@@ -107,9 +107,9 @@ teardown() {
     [ "$(cat "$tcount")" = '2' ]
 }
 
-@test "pdcdef_yaml_loadsettings: do not create variables on read yaml" {
+@test "pdcdef_yaml_readsettings: do not create variables on read yaml" {
     # run
-    output="$(pdcdef_yaml_loadsettings "$YAML_COMPLEX" "pdcyml_person_age")"
+    output="$(pdcdef_yaml_readsettings "$YAML_COMPLEX" "pdcyml_person_age")"
 
     # asserts
     [ "$pdcyml_person_age" = '' ]
@@ -185,4 +185,16 @@ teardown() {
     done
 
     [ "$(cat "$tcount2")" = '3' ]
+}
+
+# pdcdef_yaml_loadsettings ---------------------------------------------------
+@test "pdcdef_yaml_loadsettings: create variables from yaml" {
+    # mock
+    pdcdef_yaml_readsettings() { echo "pdcyml_some_value+=(hello)"; }
+
+    # run
+    pdcdef_yaml_loadsettings "file.yml" "pdcyml_some_value"
+
+    # asserts
+    [ "$pdcyml_some_value" = "hello" ]
 }
