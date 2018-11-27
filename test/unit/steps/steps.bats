@@ -17,6 +17,7 @@ teardown() {
 
     # mocks
     source() { echo "$@" >> "$test_file" ; }
+    execute() { return ; }
 
     # run
     run . "${PDC_FOLDER}/sh/steps/steps.sh"
@@ -24,30 +25,11 @@ teardown() {
     # asserts
     [ "$status" -eq 0 ]
     [ -f "$test_file" ]
-    [ $(cat "$test_file" | grep './sh/steps/_setup.sh') ]
     [ $(cat "$test_file" | grep './sh/steps/_execute.sh') ]
-}
-
-@test "steps.sh: validate execution order" {
-    # variables
-    test_file="${TEMP}/test_file"
-
-    # mocks
-    source() { return ; }
-    setup() { echo "1" >> "$test_file" ; }
-
-    # run
-    run . "${PDC_FOLDER}/sh/steps/steps.sh"
-
-    # asserts
-    [ "$status" -eq 0 ]
-    [ -f "$test_file" ]
-    [ $(cat "$test_file" | cut -d$'\n' -f1) == '1' ]
 }
 
 @test "steps.sh: validate unset imports" {
     # imports
-    source "${PDC_FOLDER}/sh/steps/_setup.sh"
     source "${PDC_FOLDER}/sh/steps/_execute.sh"
 
     # variables
@@ -56,7 +38,7 @@ teardown() {
 
     # mocks
     source() { echo 'test' >> "$test_imports" ; }
-    setup() { return ; }
+    execute() { return ; }
 
     # run
     . "${PDC_FOLDER}/sh/steps/steps.sh"
@@ -64,10 +46,9 @@ teardown() {
 
     # asserts
     [ -f "$test_file" ]
-    [ $(wc -l < "$test_imports") == 2 ]
+    [ $(wc -l < "$test_imports") == 1 ]
 
     for func in $(cat "$test_file"); do
-        [ ! $(cat "${PDC_FOLDER}/sh/steps/_setup.sh" | grep "${func}() {") ]
         [ ! $(cat "${PDC_FOLDER}/sh/steps/_execute.sh" | grep "${func}() {") ]
     done
 }

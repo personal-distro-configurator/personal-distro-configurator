@@ -43,7 +43,5 @@ execute:
 plugin:
   import:
     -
-  setup:
-    -
   execute:
     -
